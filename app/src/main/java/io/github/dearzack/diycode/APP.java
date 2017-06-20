@@ -10,9 +10,13 @@ import com.gcssloop.diycode_sdk.api.Diycode;
 
 public class APP extends Application {
 
+    public static final String client_id = "bf4af74f";
+    public static final String client_secret = "55162883298661457dd8ce48f39077aa56fd90f88fc471dc25a6aca041d93aae";
+
+
     @Override
     public void onCreate() {
         super.onCreate();
-        Diycode.init(this,"bf4af74f", "55162883298661457dd8ce48f39077aa56fd90f88fc471dc25a6aca041d93aae");
+        Diycode.init(this, client_id, client_secret);
     }
 }
