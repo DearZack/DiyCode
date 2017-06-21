@@ -1,0 +1,4 @@
+<resources>
+    <!--Main-->
+    <dimen name="tab_icon_size">25sp</dimen>
+</resources>

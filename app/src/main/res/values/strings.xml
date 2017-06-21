@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DiyCode</string>
+
+    <!--Main-->
+    <string name="main_homepage">&#xe603;</string>
+    <string name="main_notice">&#xe605;</string>
+    <string name="main_myself">&#xe607;</string>
 </resources>
