@@ -10,13 +10,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContent();
-        initData();
-        initView();
+//        setContent();
+//        initData();
+//        initView();
         EventBus.getDefault().register(this);
     }
 
-    protected abstract void setContent();
-    protected abstract void initData();
-    protected abstract void initView();
+//    protected abstract void setContent();
+//    protected abstract void initData();
+//    protected abstract void initView();
 }
