@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import io.github.dearzack.diycode.homepage.HomepageFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private String mFragmentTags[] = {  //标记
             "首页", "通知", "我的"};
     private Class mFragment[] = { //加载的Fragment
-            Fragment.class, Fragment.class, Fragment.class};
+            HomepageFragment.class, Fragment.class, Fragment.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
