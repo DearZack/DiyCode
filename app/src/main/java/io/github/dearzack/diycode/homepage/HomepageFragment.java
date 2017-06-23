@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
-import io.github.dearzack.diycode.normal.NormalFragmentAdapter;
 
 
 public class HomepageFragment extends Fragment implements HomepageContract.View {
@@ -81,7 +80,7 @@ public class HomepageFragment extends Fragment implements HomepageContract.View 
     }
 
     private void initView(View rootView) {
-        viewPager.setAdapter(new NormalFragmentAdapter(fragments,
+        viewPager.setAdapter(new HomepageFragmentAdapter(fragments,
                 titles, getActivity().getSupportFragmentManager(), getActivity()));
         tabs.setupWithViewPager(viewPager);
     }

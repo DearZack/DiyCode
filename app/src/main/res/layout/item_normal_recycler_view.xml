@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_marginEnd="@dimen/avatar_text_margin"
+        android:layout_marginStart="@dimen/avatar_text_margin"
+        android:layout_marginTop="@dimen/avatar_text_margin"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin_top"
+        android:layout_toEndOf="@id/avatar"
+        android:text="@string/app_name"
+        android:textSize="@dimen/normal_size" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/normal_margin_top"
+        android:text="@string/app_name"
+        android:textSize="@dimen/normal_size" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avatar"
+        android:layout_marginEnd="@dimen/avatar_text_margin"
+        android:layout_marginStart="@dimen/avatar_text_margin"
+        android:layout_marginTop="@dimen/avatar_text_margin"
+        android:textSize="@dimen/title_size" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_margin="@dimen/avatar_text_margin"
+        android:background="@drawable/shape_normal_type_bg"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/normal_size" />
+
+    <TextView
+        android:id="@+id/replies_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="@dimen/normal_big_margin_top"
+        android:layout_toEndOf="@id/type"
+        android:text="@string/app_name"
+        android:textSize="@dimen/normal_size" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray" />
+
+</RelativeLayout>

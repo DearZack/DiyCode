@@ -1,4 +1,4 @@
-package io.github.dearzack.diycode.normal;
+package io.github.dearzack.diycode.homepage;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -11,13 +11,13 @@ import java.util.List;
  * Created by Zack on 2017/6/23.
  */
 
-public class NormalFragmentAdapter extends FragmentPagerAdapter {
+public class HomepageFragmentAdapter extends FragmentPagerAdapter {
 
     private final String[] titles;
     private Context context;
     private List<Fragment> fragments;
 
-    public NormalFragmentAdapter(List<Fragment> fragments, String[] titles, FragmentManager fm, Context context) {
+    public HomepageFragmentAdapter(List<Fragment> fragments, String[] titles, FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
         this.fragments = fragments;

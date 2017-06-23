@@ -6,6 +6,6 @@
     <string name="main_notice">&#xe605;</string>
     <string name="main_myself">&#xe607;</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Normal-->
+    <string name="normal_replies_count">评论 %1$d</string>
 </resources>

@@ -4,4 +4,16 @@
 
     <!--Homepage-->
     <dimen name="fab_margin">22dp</dimen>
+
+    <!--Normal-->
+    <dimen name="item_height">50dp</dimen>
+    <dimen name="normal_margin_top">16dp</dimen>
+    <dimen name="normal_big_margin_top">14dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+    <dimen name="avatar_size">30dp</dimen>
+    <dimen name="avatar_text_margin">12dp</dimen>
+    <dimen name="title_size">16sp</dimen>
+    <dimen name="normal_size">12sp</dimen>
+    <dimen name="type_bg_padding_tb">2dp</dimen>
+    <dimen name="type_bg_padding_lr">6dp</dimen>
 </resources>
