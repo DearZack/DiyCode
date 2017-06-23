@@ -1,4 +1,7 @@
 <resources>
     <!--Main-->
     <dimen name="tab_icon_size">25sp</dimen>
+
+    <!--Homepage-->
+    <dimen name="fab_margin">22dp</dimen>
 </resources>
