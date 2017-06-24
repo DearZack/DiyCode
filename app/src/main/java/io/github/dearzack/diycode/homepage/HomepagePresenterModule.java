@@ -1,6 +1,5 @@
 package io.github.dearzack.diycode.homepage;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
@@ -30,17 +29,15 @@ public class HomepagePresenterModule {
 
     @Provides
     String[] provideTitles() {
-        return new String[]{"TOPICS", "NEWS", "SITES"};
+        return new String[]{"主题", "最新", "无回答", "流行", "精品"};
     }
 
     @Provides
     List<Fragment> provideFragments(String[] titles) {
         List<Fragment> fragments = new ArrayList<>();
+        String[] types = new String[]{"last_actived", "recent", "no_reply", "popular", "excellent"};
         for (int i = 0; i < titles.length; i++) {
-            NormalFragment fragment = new NormalFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("text", titles[i]);
-            fragment.setArguments(bundle);
+            NormalFragment fragment = NormalFragment.newInstance(types[i]);
             fragments.add(fragment);
         }
         return fragments;

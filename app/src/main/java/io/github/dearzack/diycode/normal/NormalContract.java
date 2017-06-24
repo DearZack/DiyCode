@@ -13,6 +13,6 @@ public interface NormalContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getList();
+        void getList(String type);
     }
 }

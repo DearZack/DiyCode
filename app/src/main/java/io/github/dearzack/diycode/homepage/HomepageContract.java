@@ -14,5 +14,6 @@ public interface HomepageContract {
 
     interface Presenter extends BasePresenter {
         void add();
+        void getNodes();
     }
 }

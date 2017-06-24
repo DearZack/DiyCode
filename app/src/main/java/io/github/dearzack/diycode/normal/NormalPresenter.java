@@ -18,11 +18,11 @@ public class NormalPresenter implements NormalContract.Presenter {
 
     @Override
     public void start() {
-        getList();
+
     }
 
     @Override
-    public void getList() {
-        Diycode.getSingleInstance().getTopicsList("last_actived", null, 0, 10);
+    public void getList(String type) {
+        Diycode.getSingleInstance().getTopicsList(type, null, 0, 10);
     }
 }

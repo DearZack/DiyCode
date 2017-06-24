@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gcssloop.diycode_sdk.api.news.event.GetNewsNodesListEvent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,9 +23,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
+import io.github.dearzack.diycode.base.BaseFragment;
 
 
-public class HomepageFragment extends Fragment implements HomepageContract.View {
+public class HomepageFragment extends BaseFragment implements HomepageContract.View {
 
     @BindView(R.id.tabs)
     TabLayout tabs;
@@ -39,6 +45,8 @@ public class HomepageFragment extends Fragment implements HomepageContract.View 
 
     @Inject
     HomepagePresenter presenter;
+
+
 
 
     public HomepageFragment() {
@@ -68,7 +76,6 @@ public class HomepageFragment extends Fragment implements HomepageContract.View 
                     .homepagePresenterModule(new HomepagePresenterModule(this))
                     .build()
                     .inject(this);
-            initView(rootView);
         }
         // 缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，
         // 要不然会发生这个rootView已经有parent的错误。
@@ -76,6 +83,8 @@ public class HomepageFragment extends Fragment implements HomepageContract.View 
         if (parent != null) {
             parent.removeView(rootView);
         }
+//        presenter.getNodes();
+        initView(rootView);
         return rootView;
     }
 
@@ -100,5 +109,12 @@ public class HomepageFragment extends Fragment implements HomepageContract.View 
     @OnClick(R.id.fab)
     public void onViewClicked() {
         presenter.add();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetNodes(GetNewsNodesListEvent event) {
+        if (event.isOk()) {
+//            initView(rootView, event.getBean());
+        }
     }
 }
