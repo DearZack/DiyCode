@@ -7,7 +7,8 @@ import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;
-import io.github.dearzack.diycode.normal.NormalFragment;
+import io.github.dearzack.diycode.news.NewsFragment;
+import io.github.dearzack.diycode.topics.TopicsFragment;
 
 /**
  * Created by Zack on 2017/6/23.
@@ -29,17 +30,16 @@ public class HomepagePresenterModule {
 
     @Provides
     String[] provideTitles() {
-        return new String[]{"主题", "最新", "无回答", "流行", "精品"};
+        return new String[]{"TOPICS", "NEWS"/*, "SITES"*/};
     }
 
     @Provides
     List<Fragment> provideFragments(String[] titles) {
         List<Fragment> fragments = new ArrayList<>();
-        String[] types = new String[]{"last_actived", "recent", "no_reply", "popular", "excellent"};
-        for (int i = 0; i < titles.length; i++) {
-            NormalFragment fragment = NormalFragment.newInstance(types[i]);
-            fragments.add(fragment);
-        }
+        TopicsFragment topicsFragment = TopicsFragment.newInstance(titles[0]);
+        fragments.add(topicsFragment);
+        NewsFragment newsFragment = NewsFragment.newInstance("");
+        fragments.add(newsFragment);
         return fragments;
     }
 }

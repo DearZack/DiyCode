@@ -1,4 +1,4 @@
-package io.github.dearzack.diycode.normal;
+package io.github.dearzack.diycode.topics;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,26 +25,26 @@ import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
 
 
-public class NormalFragment extends BaseFragment implements NormalContract.View {
+public class TopicsFragment extends BaseFragment implements TopicsContract.View {
     private static final String TYPE = "type";
-    @BindView(R.id.normal_list)
-    RecyclerView normalList;
+    @BindView(R.id.topics_list)
+    RecyclerView topicsList;
     Unbinder unbinder;
 
     @Inject
-    NormalPresenter presenter;
+    TopicsPresenter presenter;
 
-    NormalRecyclerViewAdapter adapter;
+    TopicsRecyclerViewAdapter adapter;
     List<Topic> data;
 
     private String type;
 
-    public NormalFragment() {
+    public TopicsFragment() {
         // Required empty public constructor
     }
 
-    public static NormalFragment newInstance(String param1) {
-        NormalFragment fragment = new NormalFragment();
+    public static TopicsFragment newInstance(String param1) {
+        TopicsFragment fragment = new TopicsFragment();
         Bundle args = new Bundle();
         args.putString(TYPE, param1);
         fragment.setArguments(args);
@@ -63,10 +63,10 @@ public class NormalFragment extends BaseFragment implements NormalContract.View 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_normal, container, false);
+        View view = inflater.inflate(R.layout.fragment_topics, container, false);
         unbinder = ButterKnife.bind(this, view);
-        DaggerNormalComponent.builder()
-                .normalPresenterModule(new NormalPresenterModule(this))
+        DaggerTopicsComponent.builder()
+                .topicsPresenterModule(new TopicsPresenterModule(this))
                 .build()
                 .inject(this);
         initView(view);
@@ -75,10 +75,10 @@ public class NormalFragment extends BaseFragment implements NormalContract.View 
 
     private void initView(View view) {
         data = new ArrayList<>();
-        presenter.getList(type);
-        adapter = new NormalRecyclerViewAdapter(getActivity(), data);
-        normalList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        normalList.setAdapter(adapter);
+        presenter.getTopicsList(type);
+        adapter = new TopicsRecyclerViewAdapter(getActivity(), data);
+        topicsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        topicsList.setAdapter(adapter);
     }
 
 
@@ -89,7 +89,7 @@ public class NormalFragment extends BaseFragment implements NormalContract.View 
     }
 
     @Override
-    public void setPresenter(NormalContract.Presenter presenter) {
+    public void setPresenter(TopicsContract.Presenter presenter) {
 
     }
 

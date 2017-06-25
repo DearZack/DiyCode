@@ -1,4 +1,4 @@
-package io.github.dearzack.diycode.normal;
+package io.github.dearzack.diycode.news;
 
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
@@ -7,12 +7,12 @@ import io.github.dearzack.diycode.base.BaseView;
  * Created by Zack on 2017/6/23.
  */
 
-public interface NormalContract {
+public interface NewsContract {
     interface View extends BaseView<Presenter> {
 
     }
 
     interface Presenter extends BasePresenter {
-        void getList(String type);
+        void getNewsList(String type);
     }
 }
