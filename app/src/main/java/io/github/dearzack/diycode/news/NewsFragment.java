@@ -36,7 +36,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     @Inject
     NewsPresenter presenter;
 
-    // TODO: Rename and change types of parameters
     private String news;
 
 
