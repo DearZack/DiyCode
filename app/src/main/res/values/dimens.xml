@@ -16,4 +16,10 @@
     <dimen name="normal_size">12sp</dimen>
     <dimen name="type_bg_padding_tb">2dp</dimen>
     <dimen name="type_bg_padding_lr">6dp</dimen>
+
+    <!--Sites-->
+    <dimen name="sites_item_text_padding">8dp</dimen>
+    <dimen name="site_item_padding">5dp</dimen>
+    <dimen name="logo_size">24dp</dimen>
+    <dimen name="logo_margin">15dp</dimen>
 </resources>

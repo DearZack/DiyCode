@@ -8,6 +8,7 @@ import java.util.List;
 import dagger.Module;
 import dagger.Provides;
 import io.github.dearzack.diycode.news.NewsFragment;
+import io.github.dearzack.diycode.sites.SitesFragment;
 import io.github.dearzack.diycode.topics.TopicsFragment;
 
 /**
@@ -30,7 +31,7 @@ public class HomepagePresenterModule {
 
     @Provides
     String[] provideTitles() {
-        return new String[]{"TOPICS", "NEWS"/*, "SITES"*/};
+        return new String[]{"TOPICS", "NEWS", "SITES"};
     }
 
     @Provides
@@ -40,6 +41,8 @@ public class HomepagePresenterModule {
         fragments.add(topicsFragment);
         NewsFragment newsFragment = NewsFragment.newInstance("");
         fragments.add(newsFragment);
+        SitesFragment sitesFragment = SitesFragment.newInstance("");
+        fragments.add(sitesFragment);
         return fragments;
     }
 }

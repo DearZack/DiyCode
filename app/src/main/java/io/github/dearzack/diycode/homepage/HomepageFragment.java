@@ -91,6 +91,30 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
     private void initView(View rootView) {
         viewPager.setAdapter(new HomepageFragmentAdapter(fragments,
                 titles, getActivity().getSupportFragmentManager(), getActivity()));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == 1) {
+                    fab.setScaleX(1 - positionOffset);
+                    fab.setScaleY(1 - positionOffset);
+                    fab.setAlpha(1 - positionOffset);
+                } else if (position == 0 && fab.getAlpha() < 1) {
+                    fab.setScaleX(1 - positionOffset);
+                    fab.setScaleY(1 - positionOffset);
+                    fab.setAlpha(1 - positionOffset);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         tabs.setupWithViewPager(viewPager);
     }
 
