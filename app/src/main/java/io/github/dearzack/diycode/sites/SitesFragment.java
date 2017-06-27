@@ -1,5 +1,6 @@
 package io.github.dearzack.diycode.sites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
+import io.github.dearzack.diycode.util.ClickEvent;
+import io.github.dearzack.diycode.web.WebActivity;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
@@ -113,5 +116,12 @@ public class SitesFragment extends BaseFragment implements SitesContract.View {
             }
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSiteClick(ClickEvent<Sites.Site> event) {
+        Intent intent = new Intent(getActivity(), WebActivity.class);
+        intent.putExtra("url", event.getMessage().getUrl());
+        getActivity().startActivity(intent);
     }
 }
