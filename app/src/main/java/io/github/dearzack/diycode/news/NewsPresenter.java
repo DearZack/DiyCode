@@ -22,7 +22,7 @@ public class NewsPresenter implements NewsContract.Presenter {
     }
 
     @Override
-    public void getNewsList(String type) {
-        Diycode.getSingleInstance().getNewsList(null, 0, 10);
+    public void getNewsList(String type, int offset, int limit) {
+        Diycode.getSingleInstance().getNewsList(null, offset, limit);
     }
 }

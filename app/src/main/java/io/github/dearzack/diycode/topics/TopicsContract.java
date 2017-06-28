@@ -13,6 +13,6 @@ public interface TopicsContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getTopicsList(String type);
+        void getTopicsList(String type, int offset, int limit);
     }
 }

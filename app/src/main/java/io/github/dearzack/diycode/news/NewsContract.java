@@ -13,6 +13,6 @@ public interface NewsContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getNewsList(String type);
+        void getNewsList(String type, int offset, int limit);
     }
 }

@@ -42,4 +42,6 @@ dependencies {
     compile('me.drakeet.multitype:multitype:3.0.0', {
         exclude group: 'com.android.support'
     })
+    compile 'com.github.jdsjlzx:LRecyclerView:1.4.3'
+    compile 'com.github.DearZack:LoadingWave:v1.0'
 }

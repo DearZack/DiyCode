@@ -22,7 +22,7 @@ public class TopicsPresenter implements TopicsContract.Presenter {
     }
 
     @Override
-    public void getTopicsList(String type) {
-        Diycode.getSingleInstance().getTopicsList(null, null, 0, 10);
+    public void getTopicsList(String type, int offset, int limit) {
+        Diycode.getSingleInstance().getTopicsList(null, null, offset, limit);
     }
 }

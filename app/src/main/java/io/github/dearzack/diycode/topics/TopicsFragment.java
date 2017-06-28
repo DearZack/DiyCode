@@ -2,13 +2,16 @@ package io.github.dearzack.diycode.topics;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import com.gcssloop.diycode_sdk.api.topic.event.GetTopicsListEvent;
+import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnRefreshListener;
+import com.github.jdsjlzx.recyclerview.LRecyclerView;
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -23,19 +26,22 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
+import io.github.dearzack.diycode.util.ConstantUtils;
 
 
 public class TopicsFragment extends BaseFragment implements TopicsContract.View {
     private static final String TYPE = "type";
     @BindView(R.id.topics_list)
-    RecyclerView topicsList;
+    LRecyclerView topicsList;
     Unbinder unbinder;
 
     @Inject
     TopicsPresenter presenter;
 
     TopicsRecyclerViewAdapter adapter;
+    LRecyclerViewAdapter lRecyclerViewAdapter;
     List<Topic> data;
+    boolean isRefresh = true;
 
     private String type;
 
@@ -75,10 +81,28 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
 
     private void initView(View view) {
         data = new ArrayList<>();
-        presenter.getTopicsList(type);
+        presenter.getTopicsList(type, 0, ConstantUtils.REQUEST_COUNT);
         adapter = new TopicsRecyclerViewAdapter(getActivity(), data);
         topicsList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        topicsList.setAdapter(adapter);
+        lRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
+        topicsList.setAdapter(lRecyclerViewAdapter);
+        topicsList.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isRefresh = true;
+                presenter.getTopicsList(type, 0, ConstantUtils.REQUEST_COUNT);
+            }
+        });
+        topicsList.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                isRefresh = false;
+                presenter.getTopicsList(type, data.size(), ConstantUtils.REQUEST_COUNT);
+            }
+        });
+        topicsList.setHeaderViewColor(R.color.colorPrimary, R.color.colorPrimary, R.color.gray);
+        topicsList.setArrowImageView(R.mipmap.ic_launcher);
+        topicsList.setFooterViewColor(R.color.colorPrimary, R.color.colorPrimary, R.color.gray);
     }
 
 
@@ -96,6 +120,10 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetList(GetTopicsListEvent event) {
         if (event.isOk()) {
+            if (isRefresh) {
+                data.clear();
+            }
+            topicsList.refreshComplete(ConstantUtils.REQUEST_COUNT);
             for (Topic topic : event.getBean()) {
                 data.add(topic);
             }
