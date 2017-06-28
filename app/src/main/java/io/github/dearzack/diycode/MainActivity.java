@@ -10,6 +10,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import io.github.dearzack.diycode.homepage.HomepageFragment;
+import io.github.dearzack.diycode.my.MyFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private String mFragmentTags[] = {  //标记
             "首页", "通知", "我的"};
     private Class mFragment[] = { //加载的Fragment
-            HomepageFragment.class, Fragment.class, Fragment.class};
+            HomepageFragment.class, Fragment.class, MyFragment.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +47,22 @@ public class MainActivity extends AppCompatActivity {
             mTabHost.addTab(tabSpec, mFragment[i], null);
             mTabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.color.white);
         }
-        for (int i = 0; i < mImages.length; i++) {
-            final int index = i;
-            mTabHost.getTabWidget().getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    for (int j = 0; j < mImages.length; j++) {
-                        TextView textView = (TextView) mTabHost.getTabWidget().getChildAt(j).findViewById(R.id.tv_tab_icon);
-                        textView.setTextColor(getResources().getColor(R.color.gray));
-                    }
-                    TextView textView = (TextView) mTabHost.getTabWidget().getChildAt(index).findViewById(R.id.tv_tab_icon);
-                    textView.setTextColor(getResources().getColor(R.color.colorPrimary));
-                }
-            });
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                updateTabs();
+            }
+        });
+    }
+
+    private void updateTabs() {
+        for (int i = 0; i < mTabHost.getTabWidget().getTabCount(); i++) {
+            TextView textView = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(R.id.tv_tab_icon);
+            if (i == mTabHost.getCurrentTab()) {
+                textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+            } else {
+                textView.setTextColor(getResources().getColor(R.color.gray));
+            }
         }
     }
 
