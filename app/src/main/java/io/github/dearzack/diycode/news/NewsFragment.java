@@ -1,5 +1,6 @@
 package io.github.dearzack.diycode.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
+import io.github.dearzack.diycode.util.ClickEvent;
+import io.github.dearzack.diycode.web.WebActivity;
 
 public class NewsFragment extends BaseFragment implements NewsContract.View {
     private static final String NEWS = "param1";
@@ -96,6 +99,13 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
             }
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onItemClick(ClickEvent<New> event) {
+        Intent intent = new Intent(getActivity(), WebActivity.class);
+        intent.putExtra("url", event.getMessage().getAddress());
+        getActivity().startActivity(intent);
     }
 
     @Override

@@ -11,11 +11,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.gcssloop.diycode_sdk.api.news.bean.New;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
+import io.github.dearzack.diycode.util.ClickEvent;
 import io.github.dearzack.diycode.util.CommonUtils;
 
 /**
@@ -39,7 +42,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         New news = data.get(position);
         Glide.with(context).load(news.getUser().getAvatar_url()).into(holder.avatar);
         holder.author.setText(news.getUser().getName());
@@ -47,6 +50,14 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         holder.time.setText(CommonUtils.getHowLongAgo(news.getUpdated_at()));
         holder.title.setText(news.getTitle());
         holder.address.setText(CommonUtils.getHost(news.getAddress()));
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClickEvent<New> clickEvent = new ClickEvent<>();
+                clickEvent.setMessage(data.get(holder.getAdapterPosition()));
+                EventBus.getDefault().post(clickEvent);
+            }
+        });
     }
 
 
@@ -68,10 +79,12 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         TextView title;
         @BindView(R.id.address)
         TextView address;
+        View root;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            root = itemView;
         }
     }
 }
