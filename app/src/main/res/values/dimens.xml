@@ -31,6 +31,7 @@
     <dimen name="my_head_size">50dp</dimen>
     <dimen name="my_logo_text_size">20sp</dimen>
     <dimen name="my_hint_text_size">16sp</dimen>
+    <dimen name="my_name_text_size">18sp</dimen>
     <dimen name="normal_padding">12dp</dimen>
     <dimen name="normal_margin_end">18dp</dimen>
 </resources>

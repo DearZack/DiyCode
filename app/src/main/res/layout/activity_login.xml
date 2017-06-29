@@ -8,14 +8,16 @@
     <EditText
         android:id="@+id/account"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:maxLines="1" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/account"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/login"

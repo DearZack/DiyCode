@@ -3,6 +3,7 @@ package io.github.dearzack.diycode.my;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import me.drakeet.multitype.ItemViewBinder;
  * Created by Zack on 2017/6/29.
  */
 
-public class MyHeadViewBinder extends ItemViewBinder<UserDetail, MyHeadViewBinder.ViewHolder>{
+public class MyHeadViewBinder extends ItemViewBinder<UserDetail, MyHeadViewBinder.ViewHolder> {
 
     @NonNull
     @Override
@@ -37,6 +38,12 @@ public class MyHeadViewBinder extends ItemViewBinder<UserDetail, MyHeadViewBinde
                 .error(R.mipmap.ic_launcher)
                 .into(holder.head);
         holder.name.setText(item.getName());
+        if (TextUtils.isEmpty(item.getEmail())) {
+            holder.email.setVisibility(View.GONE);
+        } else {
+            holder.email.setVisibility(View.VISIBLE);
+            holder.email.setText(item.getEmail());
+        }
         Typeface typeface = Typeface.createFromAsset(holder.icon.getContext().getAssets(), "iconfont.ttf");
         holder.icon.setTypeface(typeface);
         holder.icon.setText(R.string.my_right);
@@ -53,7 +60,7 @@ public class MyHeadViewBinder extends ItemViewBinder<UserDetail, MyHeadViewBinde
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         @NonNull
-        private final TextView name, icon;
+        private final TextView name, email, icon;
         @NonNull
         private final ImageView head;
         @NonNull
@@ -63,6 +70,7 @@ public class MyHeadViewBinder extends ItemViewBinder<UserDetail, MyHeadViewBinde
             super(itemView);
             this.root = itemView;
             this.name = (TextView) itemView.findViewById(R.id.name);
+            this.email = (TextView) itemView.findViewById(R.id.email);
             this.icon = (TextView) itemView.findViewById(R.id.icon);
             this.head = (ImageView) itemView.findViewById(R.id.head);
         }

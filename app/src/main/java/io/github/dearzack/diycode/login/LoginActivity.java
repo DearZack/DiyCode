@@ -1,12 +1,11 @@
 package io.github.dearzack.diycode.login;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -44,8 +43,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLogin(LoginEvent event) {
-        Gson gson = new Gson();
-        Log.e("TAG", gson.toJson(event));
+        if (event.isOk()) {
+            Intent intent = getIntent();
+            intent.putExtra("Token", event.getBean());
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 
     @Override
