@@ -18,7 +18,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
-import io.github.dearzack.diycode.util.ClickEvent;
 import io.github.dearzack.diycode.util.CommonUtils;
 
 /**
@@ -53,7 +52,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClickEvent<New> clickEvent = new ClickEvent<>();
+                NewsClickEvent clickEvent = new NewsClickEvent();
                 clickEvent.setMessage(data.get(holder.getAdapterPosition()));
                 EventBus.getDefault().post(clickEvent);
             }

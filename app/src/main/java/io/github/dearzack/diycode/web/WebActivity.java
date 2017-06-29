@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseActivity;
-import io.github.dearzack.diycode.util.ClickEvent;
+import io.github.dearzack.diycode.sites.SiteClickEvent;
 
 public class WebActivity extends BaseActivity implements WebContract.View {
 
@@ -111,7 +111,7 @@ public class WebActivity extends BaseActivity implements WebContract.View {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSiteClick(ClickEvent<String> event) {
+    public void onSiteClick(SiteClickEvent event) {
 
     }
 

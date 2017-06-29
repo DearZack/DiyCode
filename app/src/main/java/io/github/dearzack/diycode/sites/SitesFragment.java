@@ -18,10 +18,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
-import io.github.dearzack.diycode.util.ClickEvent;
 import io.github.dearzack.diycode.web.WebActivity;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -31,7 +29,6 @@ public class SitesFragment extends BaseFragment implements SitesContract.View {
     private static final String TYPE = "type";
     @BindView(R.id.topics_list)
     RecyclerView topicsList;
-    Unbinder unbinder;
 
     @Inject
     SitesPresenter presenter;
@@ -66,7 +63,7 @@ public class SitesFragment extends BaseFragment implements SitesContract.View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sites, container, false);
-        unbinder = ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
         DaggerSitesComponent.builder()
                 .sitesPresenterModule(new SitesPresenterModule(this))
                 .build()
@@ -97,7 +94,6 @@ public class SitesFragment extends BaseFragment implements SitesContract.View {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
@@ -119,7 +115,7 @@ public class SitesFragment extends BaseFragment implements SitesContract.View {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSiteClick(ClickEvent<Sites.Site> event) {
+    public void onSiteClick(SiteClickEvent event) {
         Intent intent = new Intent(getActivity(), WebActivity.class);
         intent.putExtra("url", event.getMessage().getUrl());
         getActivity().startActivity(intent);

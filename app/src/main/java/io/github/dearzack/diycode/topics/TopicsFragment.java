@@ -33,7 +33,6 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
     private static final String TYPE = "type";
     @BindView(R.id.topics_list)
     LRecyclerView topicsList;
-    Unbinder unbinder;
 
     @Inject
     TopicsPresenter presenter;
@@ -70,7 +69,7 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_topics, container, false);
-        unbinder = ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
         DaggerTopicsComponent.builder()
                 .topicsPresenterModule(new TopicsPresenterModule(this))
                 .build()
@@ -109,7 +108,6 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override

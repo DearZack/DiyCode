@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+//        Diycode.getSingleInstance().login("diycode888", "password");
     }
 
     private void initViews() {

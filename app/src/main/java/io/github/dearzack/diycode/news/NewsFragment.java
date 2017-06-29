@@ -24,10 +24,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
-import io.github.dearzack.diycode.util.ClickEvent;
 import io.github.dearzack.diycode.util.ConstantUtils;
 import io.github.dearzack.diycode.web.WebActivity;
 
@@ -35,7 +33,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     private static final String NEWS = "param1";
     @BindView(R.id.news_list)
     LRecyclerView newsList;
-    Unbinder unbinder;
 
     NewsRecyclerViewAdapter adapter;
     LRecyclerViewAdapter lRecyclerViewAdapter;
@@ -74,7 +71,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
-        unbinder = ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
         DaggerNewsComponent.builder()
                 .newsPresenterModule(new NewsPresenterModule(this))
                 .build()
@@ -86,7 +83,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     private void initView(View view) {
@@ -130,7 +126,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onItemClick(ClickEvent<New> event) {
+    public void onItemClick(NewsClickEvent event) {
         Intent intent = new Intent(getActivity(), WebActivity.class);
         intent.putExtra("url", event.getMessage().getAddress());
         getActivity().startActivity(intent);

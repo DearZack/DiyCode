@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
 
@@ -32,7 +31,6 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
     TabLayout tabs;
     @BindView(R.id.vp_view)
     ViewPager viewPager;
-    Unbinder unbinder;
     @BindView(R.id.fab)
     FloatingActionButton fab;
     private View rootView;
@@ -71,11 +69,12 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
         // Inflate the layout for this fragment
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_homepage, container, false);
-            unbinder = ButterKnife.bind(this, rootView);
+            ButterKnife.bind(this, rootView);
             DaggerHomepageComponent.builder()
                     .homepagePresenterModule(new HomepagePresenterModule(this))
                     .build()
                     .inject(this);
+            initView(rootView);
         }
         // 缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，
         // 要不然会发生这个rootView已经有parent的错误。
@@ -84,7 +83,6 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
             parent.removeView(rootView);
         }
 //        presenter.getNodes();
-        initView(rootView);
         return rootView;
     }
 
@@ -122,7 +120,6 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override

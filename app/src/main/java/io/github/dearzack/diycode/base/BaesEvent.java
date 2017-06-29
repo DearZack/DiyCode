@@ -1,11 +1,10 @@
-package io.github.dearzack.diycode.util;
+package io.github.dearzack.diycode.base;
 
 /**
- * Created by Zack on 2017/6/27.
+ * Created by Zack on 2017/6/29.
  */
 
-public class ClickEvent<T> {
-
+public class BaesEvent<T> {
     private T message;
 
     public T getMessage() {

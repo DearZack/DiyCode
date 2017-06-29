@@ -44,4 +44,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.blankj:utilcode:1.7.1'
 }

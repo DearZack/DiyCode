@@ -9,4 +9,12 @@
     <!--Normal-->
     <string name="normal_replies_count">评论 %1$d</string>
 
+    <!--My-->
+    <string name="my_topic">&#xe63e;</string>
+    <string name="my_reply">&#xe60a;</string>
+    <string name="my_favorite">&#xe616;</string>
+    <string name="my_about">&#xe606;</string>
+    <string name="my_setting">&#xe619;</string>
+    <string name="my_right">&#xe60f;</string>
+
 </resources>

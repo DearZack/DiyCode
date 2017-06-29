@@ -2,6 +2,7 @@ package io.github.dearzack.diycode;
 
 import android.app.Application;
 
+import com.blankj.utilcode.util.Utils;
 import com.gcssloop.diycode_sdk.api.Diycode;
 
 /**
@@ -18,5 +19,6 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         Diycode.init(this, client_id, client_secret);
+        Utils.init(this);
     }
 }
