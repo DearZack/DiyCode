@@ -97,6 +97,8 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         });
         addEmptyItems();
         presenter.getMe();
+        toolbar.setTitle("我");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
     }
 
     private void addEmptyItems() {
