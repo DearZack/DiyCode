@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gcssloop.diycode_sdk.api.Diycode;
+import com.gcssloop.diycode_sdk.api.login.event.LogoutEvent;
 import com.gcssloop.diycode_sdk.api.user.bean.UserDetail;
 import com.gcssloop.diycode_sdk.api.user.event.GetMeEvent;
 
@@ -124,6 +125,14 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         items.add(topic);
         items.add(reply);
         items.add(favorite);
+        if (Diycode.getSingleInstance().isLogin()) {
+            MyNormalBean logout = new MyNormalBean();
+            logout.setLogoRes(R.string.my_logout);
+            logout.setHint("退出登录");
+            logout.setNeedMargin(true);
+            logout.setNeedHideCount(true);
+            items.add(logout);
+        }
         adapter.notifyDataSetChanged();
     }
 
@@ -140,7 +149,7 @@ public class MyFragment extends BaseFragment implements MyContract.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetMe(GetMeEvent event) {
-        if (event.isOk()) {
+        if (event.isOk() && event.getBean() != null) {
             items.clear();
             UserDetail userDetail = event.getBean();
             items.add(0, userDetail);
@@ -159,9 +168,15 @@ public class MyFragment extends BaseFragment implements MyContract.View {
             favorite.setHint("我的收藏");
             favorite.setCount(userDetail.getFavorites_count());
             favorite.setNeedMargin(false);
+            MyNormalBean logout = new MyNormalBean();
+            logout.setLogoRes(R.string.my_logout);
+            logout.setHint("退出登录");
+            logout.setNeedMargin(true);
+            logout.setNeedHideCount(true);
             items.add(topic);
             items.add(reply);
             items.add(favorite);
+            items.add(logout);
             adapter.notifyDataSetChanged();
         }
     }
@@ -177,9 +192,18 @@ public class MyFragment extends BaseFragment implements MyContract.View {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogout(LogoutEvent event) {
+         addEmptyItems();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNormalItemClick(NormalItemClickEvent event) {
         if (Diycode.getSingleInstance().isLogin()) {
-
+            switch (event.getMessage().getHint()) {
+                case ConstantUtils.LOGOUT:
+                    presenter.logout();
+                    break;
+            }
         } else {
             goToLogin();
         }

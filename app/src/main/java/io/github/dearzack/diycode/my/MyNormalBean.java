@@ -9,6 +9,7 @@ public class MyNormalBean {
     private String hint;
     private int count;
     private boolean needMargin;
+    private boolean needHideCount;
 
     public int getLogoRes() {
         return logoRes;
@@ -40,5 +41,13 @@ public class MyNormalBean {
 
     public void setNeedMargin(boolean needMargin) {
         this.needMargin = needMargin;
+    }
+
+    public boolean isNeedHideCount() {
+        return needHideCount;
+    }
+
+    public void setNeedHideCount(boolean needHideCount) {
+        this.needHideCount = needHideCount;
     }
 }

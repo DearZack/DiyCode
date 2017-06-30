@@ -2,6 +2,7 @@ package io.github.dearzack.diycode.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,4 +20,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 //    protected abstract void setContent();
 //    protected abstract void initData();
 //    protected abstract void initView();
+
+    protected void toast(String content) {
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
+    }
 }

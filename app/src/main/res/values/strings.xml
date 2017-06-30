@@ -13,6 +13,7 @@
     <string name="my_topic">&#xe63e;</string>
     <string name="my_reply">&#xe60a;</string>
     <string name="my_favorite">&#xe616;</string>
+    <string name="my_logout">&#xe608;</string>
     <string name="my_about">&#xe606;</string>
     <string name="my_setting">&#xe619;</string>
     <string name="my_right">&#xe60f;</string>
@@ -21,5 +22,6 @@
     <string name="login_account">Email/用户名</string>
     <string name="login_password">密码</string>
     <string name="login">登录</string>
+    <string name="account_or_password_is_empty">Email/用户名或密码为空</string>
 
 </resources>

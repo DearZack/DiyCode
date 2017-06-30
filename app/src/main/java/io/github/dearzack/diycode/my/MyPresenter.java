@@ -25,4 +25,9 @@ public class MyPresenter implements MyContract.Presenter {
     public void getMe() {
         Diycode.getSingleInstance().getMe();
     }
+
+    @Override
+    public void logout() {
+        Diycode.getSingleInstance().logout();
+    }
 }

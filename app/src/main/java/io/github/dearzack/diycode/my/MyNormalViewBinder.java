@@ -39,7 +39,12 @@ public class MyNormalViewBinder extends ItemViewBinder<MyNormalBean, MyNormalVie
         holder.logo.setTypeface(typeface);
         holder.logo.setText(item.getLogoRes());
         holder.hint.setText(item.getHint());
-        holder.count.setText(String.valueOf(item.getCount()));
+        if (item.isNeedHideCount()) {
+            holder.count.setVisibility(View.GONE);
+        } else {
+            holder.count.setVisibility(View.VISIBLE);
+            holder.count.setText(String.valueOf(item.getCount()));
+        }
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
