@@ -17,4 +17,9 @@
     <string name="my_setting">&#xe619;</string>
     <string name="my_right">&#xe60f;</string>
 
+    <!--Login-->
+    <string name="login_account">Email/用户名</string>
+    <string name="login_password">密码</string>
+    <string name="login">登录</string>
+
 </resources>

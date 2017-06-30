@@ -1,28 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="io.github.dearzack.diycode.login.LoginActivity">
 
-    <EditText
-        android:id="@+id/account"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="1" />
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/common_margin"
+        android:src="@mipmap/ic_launcher" />
 
-    <EditText
-        android:id="@+id/password"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/account"
-        android:inputType="textPassword"
-        android:maxLines="1" />
+        android:layout_below="@id/logo"
+        android:layout_margin="@dimen/common_margin"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:hint="@string/login_account"
+            android:maxLines="1"
+            android:paddingEnd="@dimen/common_margin"
+            android:paddingStart="@dimen/common_margin"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="@string/login_account"
+            app:met_floatingLabelTextColor="@color/colorPrimary"
+            app:met_hideUnderline="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_ee" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:hint="@string/login_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingEnd="@dimen/common_margin"
+            android:paddingStart="@dimen/common_margin"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="@string/login_password"
+            app:met_floatingLabelTextColor="@color/colorPrimary"
+            app:met_hideUnderline="true" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/password" />
+        android:layout_below="@id/ll"
+        android:layout_margin="@dimen/common_margin"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/login_text_size" />
 
 </RelativeLayout>

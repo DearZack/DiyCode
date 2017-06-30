@@ -46,4 +46,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.blankj:utilcode:1.7.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

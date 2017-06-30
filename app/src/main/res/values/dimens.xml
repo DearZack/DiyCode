@@ -1,4 +1,7 @@
 <resources>
+
+    <!--Common-->
+    <dimen name="common_margin">12dp</dimen>
     <!--Main-->
     <dimen name="tab_icon_size">25sp</dimen>
 
@@ -34,4 +37,7 @@
     <dimen name="my_name_text_size">18sp</dimen>
     <dimen name="normal_padding">12dp</dimen>
     <dimen name="normal_margin_end">18dp</dimen>
+
+    <!--Login-->
+    <dimen name="login_text_size">18sp</dimen>
 </resources>
