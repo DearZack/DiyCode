@@ -2,7 +2,6 @@ package io.github.dearzack.diycode;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import io.github.dearzack.diycode.homepage.HomepageFragment;
 import io.github.dearzack.diycode.my.MyFragment;
+import io.github.dearzack.diycode.notice.NoticeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private String mFragmentTags[] = {  //标记
             "首页", "通知", "我的"};
     private Class mFragment[] = { //加载的Fragment
-            HomepageFragment.class, Fragment.class, MyFragment.class};
+            HomepageFragment.class, NoticeFragment.class, MyFragment.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
