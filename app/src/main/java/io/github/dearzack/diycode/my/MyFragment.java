@@ -23,9 +23,11 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.dearzack.diycode.APP;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
 import io.github.dearzack.diycode.login.LoginActivity;
+import io.github.dearzack.diycode.relate.RelateActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -109,17 +111,17 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         items.add(0, userDetail);
         MyNormalBean topic = new MyNormalBean();
         topic.setLogoRes(R.string.my_topic);
-        topic.setHint("我的帖子");
+        topic.setHint(ConstantUtils.TOPIC);
         topic.setCount(userDetail.getTopics_count());
         topic.setNeedMargin(true);
         MyNormalBean reply = new MyNormalBean();
         reply.setLogoRes(R.string.my_reply);
-        reply.setHint("我的评论");
+        reply.setHint(ConstantUtils.REPLY);
         reply.setCount(userDetail.getReplies_count());
         reply.setNeedMargin(false);
         MyNormalBean favorite = new MyNormalBean();
         favorite.setLogoRes(R.string.my_favorite);
-        favorite.setHint("我的收藏");
+        favorite.setHint(ConstantUtils.FAVORITE);
         favorite.setCount(userDetail.getFavorites_count());
         favorite.setNeedMargin(false);
         items.add(topic);
@@ -128,7 +130,7 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         if (Diycode.getSingleInstance().isLogin()) {
             MyNormalBean logout = new MyNormalBean();
             logout.setLogoRes(R.string.my_logout);
-            logout.setHint("退出登录");
+            logout.setHint(ConstantUtils.LOGOUT);
             logout.setNeedMargin(true);
             logout.setNeedHideCount(true);
             items.add(logout);
@@ -152,25 +154,26 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         if (event.isOk() && event.getBean() != null) {
             items.clear();
             UserDetail userDetail = event.getBean();
+            APP.userDetail = event.getBean();
             items.add(0, userDetail);
             MyNormalBean topic = new MyNormalBean();
             topic.setLogoRes(R.string.my_topic);
-            topic.setHint("我的帖子");
+            topic.setHint(ConstantUtils.TOPIC);
             topic.setCount(userDetail.getTopics_count());
             topic.setNeedMargin(true);
             MyNormalBean reply = new MyNormalBean();
             reply.setLogoRes(R.string.my_reply);
-            reply.setHint("我的评论");
+            reply.setHint(ConstantUtils.REPLY);
             reply.setCount(userDetail.getReplies_count());
             reply.setNeedMargin(false);
             MyNormalBean favorite = new MyNormalBean();
             favorite.setLogoRes(R.string.my_favorite);
-            favorite.setHint("我的收藏");
+            favorite.setHint(ConstantUtils.FAVORITE);
             favorite.setCount(userDetail.getFavorites_count());
             favorite.setNeedMargin(false);
             MyNormalBean logout = new MyNormalBean();
             logout.setLogoRes(R.string.my_logout);
-            logout.setHint("退出登录");
+            logout.setHint(ConstantUtils.LOGOUT);
             logout.setNeedMargin(true);
             logout.setNeedHideCount(true);
             items.add(topic);
@@ -203,6 +206,11 @@ public class MyFragment extends BaseFragment implements MyContract.View {
                 case ConstantUtils.LOGOUT:
                     presenter.logout();
                     break;
+                case ConstantUtils.TOPIC:
+                case ConstantUtils.FAVORITE:
+                case ConstantUtils.REPLY:
+                    goToRelate(event.getMessage().getHint());
+                    break;
             }
         } else {
             goToLogin();
@@ -214,6 +222,12 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         //这里有个坑，不要调用getActivity().startActivityForResult(),这样回调是在fragment的宿主activity的onActivityResult
         //直接调用startActivityForResult（）回调的是自己的onActivityResult
         startActivityForResult(intent, ConstantUtils.MY_LOGIN);
+    }
+
+    private void goToRelate(String type) {
+        Intent intent = new Intent(getActivity(), RelateActivity.class);
+        intent.putExtra(RelateActivity.TYPE, type);
+        startActivity(intent);
     }
 
     @Override
