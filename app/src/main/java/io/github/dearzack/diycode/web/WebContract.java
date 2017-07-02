@@ -16,6 +16,5 @@ public interface WebContract {
     }
 
     interface Presenter extends BasePresenter {
-        void login(@NonNull String account, @NonNull String password);
     }
 }

@@ -1,7 +1,5 @@
 package io.github.dearzack.diycode.relate;
 
-import android.support.annotation.NonNull;
-
 import com.gcssloop.diycode_sdk.api.Diycode;
 
 import javax.inject.Inject;
@@ -30,8 +28,17 @@ public class RelatePresenter implements RelateContract.Presenter {
     }
 
     @Override
-    public void login(@NonNull String account, @NonNull String password) {
-//        Diycode.getSingleInstance().login("diycode888", "password");
-        Diycode.getSingleInstance().login(account, password);
+    public void getMyTopics(String loginName, int offset, int limit) {
+        Diycode.getSingleInstance().getUserCreateTopicList(loginName, null, offset, limit);
+    }
+
+    @Override
+    public void getMyFavorites(String loginName, int offset, int limit) {
+        Diycode.getSingleInstance().getUserCollectionTopicList(loginName, offset, limit);
+    }
+
+    @Override
+    public void getMyReplies(String loginName, int offset, int limit) {
+        Diycode.getSingleInstance().getUserReplyTopicList(loginName, null, offset, limit);
     }
 }

@@ -1,7 +1,5 @@
 package io.github.dearzack.diycode.relate;
 
-import android.support.annotation.NonNull;
-
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
 
@@ -16,6 +14,8 @@ public interface RelateContract {
     }
 
     interface Presenter extends BasePresenter {
-        void login(@NonNull String account, @NonNull String password);
+        void getMyTopics(String loginName, int offset, int limit);
+        void getMyFavorites(String loginName, int offset, int limit);
+        void getMyReplies(String loginName, int offset, int limit);
     }
 }

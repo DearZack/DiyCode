@@ -1,9 +1,5 @@
 package io.github.dearzack.diycode.web;
 
-import android.support.annotation.NonNull;
-
-import com.gcssloop.diycode_sdk.api.Diycode;
-
 import javax.inject.Inject;
 
 /**
@@ -29,9 +25,4 @@ public class WebPresenter implements WebContract.Presenter {
 
     }
 
-    @Override
-    public void login(@NonNull String account, @NonNull String password) {
-//        Diycode.getSingleInstance().login("diycode888", "password");
-        Diycode.getSingleInstance().login(account, password);
-    }
 }
