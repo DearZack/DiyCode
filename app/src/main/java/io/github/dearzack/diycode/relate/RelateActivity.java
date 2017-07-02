@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserCreateTopicListEvent;
@@ -92,8 +91,11 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
             return;
         }
         if (event.isOk() && event.getBean() != null) {
+            items.clear();
             List<Topic> myTopics = event.getBean();
-            items.add(myTopics);
+            for (Topic topic : myTopics) {
+                items.add(topic);
+            }
             adapter.notifyDataSetChanged();
         }
     }
@@ -104,16 +106,27 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
             return;
         }
         if (event.isOk() && event.getBean() != null) {
+            items.clear();
             List<Topic> myTopics = event.getBean();
-            Log.e(TAG, myTopics.size() + "");
+            for (Topic topic : myTopics) {
+                items.add(topic);
+            }
+            adapter.notifyDataSetChanged();
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetMyReplies(GetUserReplyTopicListEvent event) {
+        if (!type.equals(ConstantUtils.REPLY)) {
+            return;
+        }
         if (event.isOk() && event.getBean() != null) {
+            items.clear();
             List<Topic> myTopics = event.getBean();
-            Log.e(TAG, myTopics.size() + "");
+            for (Topic topic : myTopics) {
+                items.add(topic);
+            }
+            adapter.notifyDataSetChanged();
         }
     }
 
