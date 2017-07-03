@@ -5,11 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gcssloop.diycode_sdk.api.notifications.event.GetNotificationsListEvent;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -61,6 +56,18 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
     private void initView(View view) {
     }
 
@@ -75,8 +82,4 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetNotificationsList(GetNotificationsListEvent event) {
-
-    }
 }

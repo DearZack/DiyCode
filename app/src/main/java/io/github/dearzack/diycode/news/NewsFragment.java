@@ -14,9 +14,6 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +78,18 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
@@ -111,8 +120,13 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         newsList.setFooterViewColor(R.color.colorPrimary, R.color.colorPrimary, R.color.gray);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetList(GetNewsListEvent event) {
+    @Override
+    public void setPresenter(NewsContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public void onGetNewsList(GetNewsListEvent event) {
         if (event.isOk()) {
             if (isRefresh) {
                 data.clear();
@@ -125,15 +139,10 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Override
     public void onItemClick(NewsClickEvent event) {
         Intent intent = new Intent(getActivity(), WebActivity.class);
         intent.putExtra("url", event.getMessage().getAddress());
         getActivity().startActivity(intent);
-    }
-
-    @Override
-    public void setPresenter(NewsContract.Presenter presenter) {
-
     }
 }

@@ -9,11 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gcssloop.diycode_sdk.api.news.event.GetNewsNodesListEvent;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,6 +56,18 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
     }
 
     @Override
@@ -132,10 +139,5 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
         presenter.add();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetNodes(GetNewsNodesListEvent event) {
-        if (event.isOk()) {
-//            initView(rootView, event.getBean());
-        }
-    }
+
 }

@@ -14,9 +14,6 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,8 +124,15 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetList(GetTopicsListEvent event) {
+
+
+    @Override
+    public void goToTopicDetailActivity(Topic topic) {
+        Toast.makeText(getActivity(), topic.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGetTopicsList(GetTopicsListEvent event) {
         if (event.isOk()) {
             if (isRefresh) {
                 data.clear();
@@ -139,10 +143,5 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
             }
             adapter.notifyDataSetChanged();
         }
-    }
-
-    @Override
-    public void goToTopicDetailActivity(Topic topic) {
-        Toast.makeText(getActivity(), topic.toString(), Toast.LENGTH_SHORT).show();
     }
 }

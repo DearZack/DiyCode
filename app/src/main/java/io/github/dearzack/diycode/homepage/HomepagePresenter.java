@@ -21,12 +21,12 @@ public class HomepagePresenter implements HomepageContract.Presenter {
 
     @Override
     public void start() {
-
+//        EventBus.getDefault().register(this);
     }
 
     @Override
     public void stop() {
-
+//        EventBus.getDefault().unregister(this);
     }
 
     @Override

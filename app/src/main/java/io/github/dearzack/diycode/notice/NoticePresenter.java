@@ -18,12 +18,12 @@ public class NoticePresenter implements NoticeContract.Presenter {
 
     @Override
     public void start() {
-
+//        EventBus.getDefault().register(this);
     }
 
     @Override
     public void stop() {
-
+//        EventBus.getDefault().unregister(this);
     }
 
     @Override

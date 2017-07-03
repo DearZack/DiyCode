@@ -16,9 +16,6 @@ import com.gcssloop.diycode_sdk.api.login.event.LogoutEvent;
 import com.gcssloop.diycode_sdk.api.user.bean.UserDetail;
 import com.gcssloop.diycode_sdk.api.user.event.GetMeEvent;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -81,6 +78,18 @@ public class MyFragment extends BaseFragment implements MyContract.View {
             parent.removeView(rootView);
         }
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
     }
 
     private void initView(View view) {
@@ -149,7 +158,6 @@ public class MyFragment extends BaseFragment implements MyContract.View {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetMe(GetMeEvent event) {
         if (event.isOk() && event.getBean() != null) {
             items.clear();
@@ -184,8 +192,6 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         }
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onHeadClick(HeadClickEvent event) {
         if (Diycode.getSingleInstance().isLogin()) {
 
@@ -194,12 +200,10 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLogout(LogoutEvent event) {
          addEmptyItems();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNormalItemClick(NormalItemClickEvent event) {
         if (Diycode.getSingleInstance().isLogin()) {
             switch (event.getMessage().getHint()) {

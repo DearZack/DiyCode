@@ -1,5 +1,7 @@
 package io.github.dearzack.diycode.sites;
 
+import com.gcssloop.diycode_sdk.api.sites.event.GetSitesEvent;
+
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
 
@@ -9,7 +11,8 @@ import io.github.dearzack.diycode.base.BaseView;
 
 public interface SitesContract {
     interface View extends BaseView<Presenter> {
-
+        void onGetSiteList(GetSitesEvent event);
+        void onSiteClick(SiteClickEvent event);
     }
 
     interface Presenter extends BasePresenter {

@@ -11,9 +11,6 @@ import android.view.ViewGroup;
 import com.gcssloop.diycode_sdk.api.sites.bean.Sites;
 import com.gcssloop.diycode_sdk.api.sites.event.GetSitesEvent;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -101,8 +98,20 @@ public class SitesFragment extends BaseFragment implements SitesContract.View {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetList(GetSitesEvent event) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    public void onGetSiteList(GetSitesEvent event) {
         if (event.isOk()) {
             for (Sites sites : event.getBean()) {
                 items.add(sites);
@@ -114,7 +123,6 @@ public class SitesFragment extends BaseFragment implements SitesContract.View {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSiteClick(SiteClickEvent event) {
         Intent intent = new Intent(getActivity(), WebActivity.class);
         intent.putExtra("url", event.getMessage().getUrl());
