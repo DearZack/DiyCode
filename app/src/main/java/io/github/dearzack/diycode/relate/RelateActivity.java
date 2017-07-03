@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserCreateTopicListEvent;
@@ -66,6 +67,12 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
         toolbar.setTitle(type);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         switch (type) {
             case ConstantUtils.TOPIC:
                 presenter.getMyTopics(APP.userDetail.getLogin(), 0, ConstantUtils.REQUEST_COUNT);
@@ -75,6 +82,8 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
                 break;
             case ConstantUtils.REPLY:
                 presenter.getMyReplies(APP.userDetail.getLogin(), 0, ConstantUtils.REQUEST_COUNT);
+                break;
+            default:
                 break;
         }
     }
