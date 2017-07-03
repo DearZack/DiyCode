@@ -1,5 +1,7 @@
 package io.github.dearzack.diycode.topics;
 
+import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
+
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
 
@@ -9,7 +11,7 @@ import io.github.dearzack.diycode.base.BaseView;
 
 public interface TopicsContract {
     interface View extends BaseView<Presenter> {
-
+        void goToTopicDetailActivity(Topic topic);
     }
 
     interface Presenter extends BasePresenter {

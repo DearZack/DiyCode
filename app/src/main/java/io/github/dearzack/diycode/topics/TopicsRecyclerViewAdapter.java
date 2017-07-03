@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,7 +42,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Topic topic = data.get(position);
+        final Topic topic = data.get(position);
         Glide.with(context).load(topic.getUser().getAvatar_url()).into(holder.avatar);
         holder.author.setText(topic.getUser().getName());
         holder.type.setText(topic.getNode_name());
@@ -49,6 +51,14 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
         holder.repliesCount.setText(String.format(
                 context.getString(R.string.normal_replies_count),
                 topic.getReplies_count()));
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TopicsClickEvent clickEvent = new TopicsClickEvent();
+                clickEvent.setMessage(topic);
+                EventBus.getDefault().post(clickEvent);
+            }
+        });
     }
 
     @Override
@@ -69,9 +79,11 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
         TextView title;
         @BindView(R.id.replies_count)
         TextView repliesCount;
+        View root;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            root = itemView;
             ButterKnife.bind(this, itemView);
         }
     }

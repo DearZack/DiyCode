@@ -22,6 +22,11 @@ public class SitesPresenter implements SitesContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void getSitesList(String type) {
         Diycode.getSingleInstance().getSites();
     }

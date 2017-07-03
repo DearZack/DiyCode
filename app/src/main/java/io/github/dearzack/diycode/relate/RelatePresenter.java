@@ -28,6 +28,11 @@ public class RelatePresenter implements RelateContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void getMyTopics(String loginName, int offset, int limit) {
         Diycode.getSingleInstance().getUserCreateTopicList(loginName, null, offset, limit);
     }

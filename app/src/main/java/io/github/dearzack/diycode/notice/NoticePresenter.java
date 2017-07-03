@@ -22,6 +22,11 @@ public class NoticePresenter implements NoticeContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void getMe() {
         Diycode.getSingleInstance().getMe();
     }

@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import com.gcssloop.diycode_sdk.api.topic.event.GetTopicsListEvent;
@@ -23,7 +24,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
 import io.github.dearzack.diycode.util.ConstantUtils;
@@ -62,6 +62,18 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
         if (getArguments() != null) {
             type = getArguments().getString(TYPE);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
     }
 
     @Override
@@ -127,5 +139,10 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
             }
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void goToTopicDetailActivity(Topic topic) {
+        Toast.makeText(getActivity(), topic.toString(), Toast.LENGTH_SHORT).show();
     }
 }

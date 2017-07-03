@@ -25,6 +25,11 @@ public class HomepagePresenter implements HomepageContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void add() {
         Log.e("zhouxiong", "zzzzzz");
     }

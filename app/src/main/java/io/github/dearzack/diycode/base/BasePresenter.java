@@ -6,4 +6,5 @@ package io.github.dearzack.diycode.base;
 
 public interface BasePresenter {
     void start();
+    void stop();
 }

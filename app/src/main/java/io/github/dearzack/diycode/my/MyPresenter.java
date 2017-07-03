@@ -22,6 +22,11 @@ public class MyPresenter implements MyContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void getMe() {
         Diycode.getSingleInstance().getMe();
     }
