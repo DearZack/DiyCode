@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
-import io.github.dearzack.diycode.base.BaesEvent;
+import io.github.dearzack.diycode.base.BaseEvent;
 import io.github.dearzack.diycode.base.BaseActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
 import me.drakeet.multitype.Items;
@@ -97,7 +97,7 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void test(BaesEvent<String> event) {
+    public void test(BaseEvent<String> event) {
     }
 
 
