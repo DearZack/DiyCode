@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_topic_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_ee"
+    android:orientation="vertical"
+    tools:context="io.github.dearzack.diycode.topicdetail.TopicDetailActivity">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

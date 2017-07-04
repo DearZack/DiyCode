@@ -24,4 +24,9 @@
     <string name="login">登录</string>
     <string name="account_or_password_is_empty">Email/用户名或密码为空</string>
 
+    <!--TopicDetail-->
+    <string name="topic_detail_reply_count">共收到 %1$d 条回复</string>
+    <string name="topic_detail_like">&#xe623;</string>
+    <string name="topic_detail_favorite">&#xe64a;</string>
+
 </resources>

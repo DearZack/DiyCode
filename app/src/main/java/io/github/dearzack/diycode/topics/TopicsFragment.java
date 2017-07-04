@@ -1,11 +1,11 @@
 package io.github.dearzack.diycode.topics;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import com.gcssloop.diycode_sdk.api.topic.event.GetTopicsListEvent;
@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
+import io.github.dearzack.diycode.topicdetail.TopicDetailActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
 
 
@@ -128,7 +129,9 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
 
     @Override
     public void goToTopicDetailActivity(Topic topic) {
-        Toast.makeText(getActivity(), topic.toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), TopicDetailActivity.class);
+        intent.putExtra("topic", topic);
+        startActivity(intent);
     }
 
     @Override

@@ -20,6 +20,7 @@
         <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".web.WebActivity" />
         <activity android:name=".relate.RelateActivity"/>
+        <activity android:name=".topicdetail.TopicDetailActivity"/>
     </application>
 
 </manifest>
