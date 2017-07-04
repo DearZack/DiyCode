@@ -28,5 +28,7 @@
     <string name="topic_detail_reply_count">共收到 %1$d 条回复</string>
     <string name="topic_detail_like">&#xe623;</string>
     <string name="topic_detail_favorite">&#xe64a;</string>
+    <string name="topic_detail_reply">&#xe609;</string>
+    <string name="topic_detail_position_and_time">%1$d楼  ·  %2$s</string>
 
 </resources>

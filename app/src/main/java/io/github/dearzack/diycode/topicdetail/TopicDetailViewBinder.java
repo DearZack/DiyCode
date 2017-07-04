@@ -45,23 +45,24 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
         holder.like.setText(holder.like.getContext().getString(R.string.topic_detail_like));
         holder.favorite.setTypeface(typeface);
         holder.favorite.setText(holder.favorite.getContext().getString(R.string.topic_detail_favorite));
-        if (item.getLikes_count() == 0) {
-            holder.likeCount.setVisibility(View.GONE);
-        } else {
-            holder.likeCount.setText(item.getLikes_count() + " ");
-            holder.likeCount.setVisibility(View.VISIBLE);
-        }
+        setTextCount(item, holder.likeCount);
         setTextColor(holder.like, item.getLiked());
         setTextColor(holder.favorite, item.getFavorited());
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onLikeClick(item, holder.like, holder.likeCount);
+                onLikeChanged(item, holder.like, holder.likeCount);
+            }
+        });
+        holder.favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFavoriteChanged(item, holder.favorite);
             }
         });
     }
 
-    private void onLikeClick(TopicContent content, TextView like, TextView likeCount) {
+    private void onLikeChanged(TopicContent content, TextView like, TextView likeCount) {
         if (content.getLiked()) {
             content.setLiked(false);
             content.setLikes_count(content.getLikes_count() - 1);
@@ -69,8 +70,14 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
             content.setLiked(true);
             content.setLikes_count(content.getLikes_count() + 1);
         }
+        setTextCount(content, likeCount);
         setTextColor(like, content.getLiked());
         likeCount.setText(content.getLikes_count() + "");
+    }
+
+    private void onFavoriteChanged(TopicContent content, TextView favorite) {
+        content.setFavorited(!content.getFavorited());
+        setTextColor(favorite, content.getFavorited());
     }
 
     private void setTextColor(TextView textView, boolean isBlue) {
@@ -80,6 +87,16 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
             textView.setTextColor(textView.getContext().getResources().getColor(R.color.gray));
         }
     }
+
+    private void setTextCount(TopicContent content, TextView likeCount) {
+        if (content.getLikes_count() == 0) {
+            likeCount.setVisibility(View.INVISIBLE);
+        } else {
+            likeCount.setText(content.getLikes_count() + " ");
+            likeCount.setVisibility(View.VISIBLE);
+        }
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.avatar)
         ImageView avatar;

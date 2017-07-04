@@ -40,4 +40,8 @@
 
     <!--Login-->
     <dimen name="login_text_size">18sp</dimen>
+
+    <!--TopicDetail-->
+    <dimen name="topic_detail_name_text_size">13sp</dimen>
+    <dimen name="topic_detail_name_position_size">11sp</dimen>
 </resources>
