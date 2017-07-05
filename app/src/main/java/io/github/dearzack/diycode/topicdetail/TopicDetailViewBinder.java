@@ -1,5 +1,6 @@
 package io.github.dearzack.diycode.topicdetail;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.gcssloop.diycode_sdk.api.Diycode;
 import com.gcssloop.diycode_sdk.api.topic.bean.TopicContent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
+import io.github.dearzack.diycode.login.LoginActivity;
+import io.github.dearzack.diycode.util.ConstantUtils;
 import io.github.dearzack.diycode.widget.ZWebView;
 import me.drakeet.multitype.ItemViewBinder;
 
@@ -63,6 +67,15 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
     }
 
     private void onLikeChanged(TopicContent content, TextView like, TextView likeCount) {
+        if (!Diycode.getSingleInstance().isLogin()) {
+            Intent intent = new Intent(like.getContext(), LoginActivity.class);
+            if (like.getContext() instanceof TopicDetailActivity) {
+                ((TopicDetailActivity) like.getContext()).startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_LOGIN);
+            } else {
+                like.getContext().startActivity(intent);
+            }
+            return;
+        }
         if (content.getLiked()) {
             content.setLiked(false);
             content.setLikes_count(content.getLikes_count() - 1);
@@ -76,6 +89,16 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
     }
 
     private void onFavoriteChanged(TopicContent content, TextView favorite) {
+        if (!Diycode.getSingleInstance().isLogin()) {
+            Intent intent = new Intent(favorite.getContext(), LoginActivity.class);
+            if (favorite.getContext() instanceof TopicDetailActivity) {
+                ((TopicDetailActivity) favorite.getContext()).startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_LOGIN);
+            } else {
+                favorite.getContext().startActivity(intent);
+            }
+            favorite.getContext().startActivity(intent);
+            return;
+        }
         content.setFavorited(!content.getFavorited());
         setTextColor(favorite, content.getFavorited());
     }

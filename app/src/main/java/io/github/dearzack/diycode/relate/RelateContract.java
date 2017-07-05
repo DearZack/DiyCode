@@ -1,5 +1,8 @@
 package io.github.dearzack.diycode.relate;
 
+import com.gcssloop.diycode_sdk.api.user.event.GetUserCreateTopicListEvent;
+import com.gcssloop.diycode_sdk.api.user.event.GetUserReplyTopicListEvent;
+
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
 
@@ -10,7 +13,9 @@ import io.github.dearzack.diycode.base.BaseView;
 public interface RelateContract {
 
     interface View extends BaseView<Presenter> {
-
+        void onGetMyTopics(GetUserCreateTopicListEvent event);
+        void onGetMyFavorites(GetUserCreateTopicListEvent event);
+        void onGetMyReplies(GetUserReplyTopicListEvent event);
     }
 
     interface Presenter extends BasePresenter {

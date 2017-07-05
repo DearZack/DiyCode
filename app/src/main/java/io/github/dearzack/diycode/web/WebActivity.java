@@ -10,16 +10,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseActivity;
-import io.github.dearzack.diycode.sites.SiteClickEvent;
 
 public class WebActivity extends BaseActivity implements WebContract.View {
 
@@ -79,6 +75,18 @@ public class WebActivity extends BaseActivity implements WebContract.View {
         initViews();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
     private void initViews() {
         toolbar.setTitle(url);
         setSupportActionBar(toolbar);
@@ -106,11 +114,6 @@ public class WebActivity extends BaseActivity implements WebContract.View {
 
     @Override
     public void setPresenter(WebContract.Presenter presenter) {
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSiteClick(SiteClickEvent event) {
 
     }
 

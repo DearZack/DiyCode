@@ -2,6 +2,8 @@ package io.github.dearzack.diycode.login;
 
 import android.support.annotation.NonNull;
 
+import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
+
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
 
@@ -12,7 +14,7 @@ import io.github.dearzack.diycode.base.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView<Presenter> {
-
+        void onLogin(LoginEvent event);
     }
 
     interface Presenter extends BasePresenter {

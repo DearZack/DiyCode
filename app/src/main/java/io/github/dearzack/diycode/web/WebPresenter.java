@@ -22,12 +22,12 @@ public class WebPresenter implements WebContract.Presenter {
 
     @Override
     public void start() {
-
+//        EventBus.getDefault().register(this);
     }
 
     @Override
     public void stop() {
-
+//        EventBus.getDefault().unregister(this);
     }
 
 }

@@ -1,5 +1,6 @@
 package io.github.dearzack.diycode.topicdetail;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,15 +15,11 @@ import com.gcssloop.diycode_sdk.api.topic.bean.TopicReply;
 import com.gcssloop.diycode_sdk.api.topic.event.GetTopicEvent;
 import com.gcssloop.diycode_sdk.api.topic.event.GetTopicRepliesListEvent;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
-import io.github.dearzack.diycode.base.BaseEvent;
 import io.github.dearzack.diycode.base.BaseActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
 import me.drakeet.multitype.Items;
@@ -96,11 +93,6 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
         presenter.getTopicRepliesList(topic.getId(), 0, ConstantUtils.REQUEST_COUNT);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void test(BaseEvent<String> event) {
-    }
-
-
     @Override
     public void setPresenter(TopicDetailContract.Presenter presenter) {
 
@@ -121,6 +113,20 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
                 items.add(topicReply);
             }
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ConstantUtils.TOPIC_DETAIL_LOGIN:
+                if (resultCode == RESULT_OK) {
+                    items.clear();
+                    adapter.notifyDataSetChanged();
+                    presenter.getTopic(topic.getId());
+                }
+                break;
         }
     }
 }

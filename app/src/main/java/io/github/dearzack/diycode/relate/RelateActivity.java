@@ -11,9 +11,6 @@ import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserCreateTopicListEvent;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserReplyTopicListEvent;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -94,7 +91,7 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Override
     public void onGetMyTopics(GetUserCreateTopicListEvent event) {
         if (!type.equals(ConstantUtils.TOPIC)) {
             return;
@@ -109,7 +106,7 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Override
     public void onGetMyFavorites(GetUserCreateTopicListEvent event) {
         if (!type.equals(ConstantUtils.FAVORITE)) {
             return;
@@ -124,7 +121,7 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Override
     public void onGetMyReplies(GetUserReplyTopicListEvent event) {
         if (!type.equals(ConstantUtils.REPLY)) {
             return;

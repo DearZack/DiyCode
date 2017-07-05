@@ -10,6 +10,9 @@ public class ConstantUtils {
 //    My
     public static final int MY_LOGIN = 0x0001;
 
+//    TopicDetail
+    public static final int TOPIC_DETAIL_LOGIN = 0x0101;
+
 
 
 //string

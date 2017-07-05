@@ -8,9 +8,6 @@ import android.widget.EditText;
 
 import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -41,8 +38,19 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 .inject(this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.start();
+    }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
     public void onLogin(LoginEvent event) {
         if (event.isOk() && event.getBean() != null) {
             Intent intent = getIntent();

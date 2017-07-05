@@ -1,5 +1,6 @@
 package io.github.dearzack.diycode.topicdetail;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,13 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gcssloop.diycode_sdk.api.Diycode;
 import com.gcssloop.diycode_sdk.api.topic.bean.TopicReply;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
+import io.github.dearzack.diycode.login.LoginActivity;
 import io.github.dearzack.diycode.util.CommonUtils;
 import io.github.dearzack.diycode.util.GlideImageGetter;
 import io.github.dearzack.diycode.util.HtmlUtil;
@@ -46,6 +50,30 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
         holder.content.setText(
                 Html.fromHtml(HtmlUtil.removeP(item.getBody_html()),
                         new GlideImageGetter(holder.content.getContext(), holder.content), null));
+        holder.avatar.setOnClickListener(listener);
+        holder.author.setOnClickListener(listener);
+        holder.reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reply(v);
+            }
+        });
+    }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(v.getContext(), "打开个人详情界面", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private void reply(View view) {
+        if (!Diycode.getSingleInstance().isLogin()) {
+            Intent intent = new Intent(view.getContext(), LoginActivity.class);
+            view.getContext().startActivity(intent);
+            return;
+        }
+        Toast.makeText(view.getContext(), "回复", Toast.LENGTH_SHORT).show();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

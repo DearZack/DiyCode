@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
-
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
@@ -14,7 +12,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        setContent();
 //        initData();
 //        initView();
-        EventBus.getDefault().register(this);
     }
 
 //    protected abstract void setContent();
