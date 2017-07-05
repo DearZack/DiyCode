@@ -125,6 +125,7 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
                     items.clear();
                     adapter.notifyDataSetChanged();
                     presenter.getTopic(topic.getId());
+                    presenter.getTopicRepliesList(topic.getId(), 0, ConstantUtils.REQUEST_COUNT);
                 }
                 break;
         }

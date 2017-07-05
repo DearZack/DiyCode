@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.login.LoginActivity;
+import io.github.dearzack.diycode.personal.PersonalActivity;
 import io.github.dearzack.diycode.util.CommonUtils;
 import io.github.dearzack.diycode.util.GlideImageGetter;
 import io.github.dearzack.diycode.util.HtmlUtil;
@@ -39,7 +40,7 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull TopicReply item) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull final TopicReply item) {
         Glide.with(holder.avatar.getContext()).load(item.getUser().getAvatar_url()).into(holder.avatar);
         holder.author.setText(item.getUser().getName());
         holder.positionAndTime.setText(String.format(holder.positionAndTime.getContext().getString(R.string.topic_detail_position_and_time),
@@ -50,8 +51,22 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
         holder.content.setText(
                 Html.fromHtml(HtmlUtil.removeP(item.getBody_html()),
                         new GlideImageGetter(holder.content.getContext(), holder.content), null));
-        holder.avatar.setOnClickListener(listener);
-        holder.author.setOnClickListener(listener);
+        holder.avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PersonalActivity.class);
+                intent.putExtra(PersonalActivity.LOGIN_NAME, item.getUser().getLogin());
+                v.getContext().startActivity(intent);
+            }
+        });
+        holder.author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PersonalActivity.class);
+                intent.putExtra(PersonalActivity.LOGIN_NAME, item.getUser().getLogin());
+                v.getContext().startActivity(intent);
+            }
+        });
         holder.reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,13 +74,6 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
             }
         });
     }
-
-    private View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), "打开个人详情界面", Toast.LENGTH_SHORT).show();
-        }
-    };
 
     private void reply(View view) {
         if (!Diycode.getSingleInstance().isLogin()) {

@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.login.LoginActivity;
+import io.github.dearzack.diycode.personal.PersonalActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
 import io.github.dearzack.diycode.widget.ZWebView;
 import me.drakeet.multitype.ItemViewBinder;
@@ -64,6 +65,22 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
                 onFavoriteChanged(item, holder.favorite);
             }
         });
+        holder.avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PersonalActivity.class);
+                intent.putExtra(PersonalActivity.LOGIN_NAME, item.getUser().getLogin());
+                v.getContext().startActivity(intent);
+            }
+        });
+        holder.author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PersonalActivity.class);
+                intent.putExtra(PersonalActivity.LOGIN_NAME, item.getUser().getLogin());
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     private void onLikeChanged(TopicContent content, TextView like, TextView likeCount) {
@@ -96,7 +113,6 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
             } else {
                 favorite.getContext().startActivity(intent);
             }
-            favorite.getContext().startActivity(intent);
             return;
         }
         content.setFavorited(!content.getFavorited());
