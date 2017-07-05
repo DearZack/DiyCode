@@ -80,7 +80,10 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
         setTextColor(favorite, content.getFavorited());
     }
 
-    private void setTextColor(TextView textView, boolean isBlue) {
+    private void setTextColor(TextView textView, Boolean isBlue) {
+        if (isBlue == null) {
+            return;
+        }
         if (isBlue) {
             textView.setTextColor(textView.getContext().getResources().getColor(R.color.colorPrimary));
         } else {
