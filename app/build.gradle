@@ -46,4 +46,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8@aar'
 }

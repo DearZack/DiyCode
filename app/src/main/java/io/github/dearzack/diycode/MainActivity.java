@@ -3,16 +3,16 @@ package io.github.dearzack.diycode;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import io.github.dearzack.diycode.base.BaseActivity;
 import io.github.dearzack.diycode.homepage.HomepageFragment;
 import io.github.dearzack.diycode.my.MyFragment;
 import io.github.dearzack.diycode.notice.NoticeFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -81,4 +81,8 @@ public class MainActivity extends AppCompatActivity {
         return view;
     }
 
+    @Override
+    public boolean isSupportSwipeBack() {
+        return false;
+    }
 }

@@ -6,6 +6,8 @@ import com.blankj.utilcode.util.Utils;
 import com.gcssloop.diycode_sdk.api.Diycode;
 import com.gcssloop.diycode_sdk.api.user.bean.UserDetail;
 
+import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
+
 /**
  * Created by Zack on 2017/6/20.
  */
@@ -22,5 +24,6 @@ public class APP extends Application {
         super.onCreate();
         Diycode.init(this, client_id, client_secret);
         Utils.init(this);
+        BGASwipeBackManager.getInstance().init(this);
     }
 }
