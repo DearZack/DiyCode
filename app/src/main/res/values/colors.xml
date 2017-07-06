@@ -8,6 +8,8 @@
     <color name="white">#ffffff</color>
     <color name="gray">#cccccc</color>
     <color name="gray_66">#666666</color>
+    <color name="gray_aa">#aaaaaa</color>
+    <color name="gray_cc">#cccccc</color>
     <color name="gray_ee">#eeeeee</color>
 
     <!--Main-->
