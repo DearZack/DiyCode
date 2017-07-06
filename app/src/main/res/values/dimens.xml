@@ -45,10 +45,10 @@
     <dimen name="topic_detail_name_text_size">13sp</dimen>
     <dimen name="topic_detail_name_position_size">11sp</dimen>
     
-    <dimen name="personal_avatar_size">80dp</dimen>
+    <dimen name="personal_avatar_size">60dp</dimen>
     <dimen name="personal_threshold">40dp</dimen>
-    <dimen name="personal_avatar_margin_start">20dp</dimen>
-    <dimen name="personal_avatar_margin_top">40dp</dimen>
-    <dimen name="personal_text_margin_start">115dp</dimen>
+    <dimen name="personal_avatar_margin_start">30dp</dimen>
+    <dimen name="personal_avatar_margin_top">50dp</dimen>
+    <dimen name="personal_text_margin_start">105dp</dimen>
     <dimen name="personal_normal_text_size">16sp</dimen>
 </resources>

@@ -34,11 +34,11 @@
 
 
                 <TextView
+                    android:id="@+id/other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="85dp"
-                    android:text="哈哈哈哈"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_ee"
                     android:textSize="@dimen/personal_normal_text_size" />
 
             </RelativeLayout>
@@ -64,7 +64,7 @@
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,7 +78,6 @@
         android:layout_height="@dimen/personal_avatar_size"
         android:layout_marginStart="@dimen/personal_avatar_margin_start"
         android:layout_marginTop="@dimen/personal_avatar_margin_top"
-        android:src="@mipmap/ic_launcher"
         app:layout_behavior="io.github.dearzack.diycode.widget.ImageBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>

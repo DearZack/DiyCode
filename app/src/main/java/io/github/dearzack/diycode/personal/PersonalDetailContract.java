@@ -1,7 +1,7 @@
 package io.github.dearzack.diycode.personal;
 
-import com.gcssloop.diycode_sdk.api.topic.event.GetTopicEvent;
-import com.gcssloop.diycode_sdk.api.topic.event.GetTopicRepliesListEvent;
+import com.gcssloop.diycode_sdk.api.user.event.GetUserCreateTopicListEvent;
+import com.gcssloop.diycode_sdk.api.user.event.GetUserEvent;
 
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
@@ -13,8 +13,12 @@ import io.github.dearzack.diycode.base.BaseView;
 public interface PersonalDetailContract {
 
     interface View extends BaseView<Presenter> {
+        void onGetUser(GetUserEvent event);
+        void onGetTopics(GetUserCreateTopicListEvent event);
     }
 
     interface Presenter extends BasePresenter {
+        void getUser(String loginName);
+        void getTopics(String loginName, int offset, int limit);
     }
 }

@@ -24,6 +24,7 @@ import io.github.dearzack.diycode.APP;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
 import io.github.dearzack.diycode.login.LoginActivity;
+import io.github.dearzack.diycode.personal.PersonalActivity;
 import io.github.dearzack.diycode.relate.RelateActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
 import me.drakeet.multitype.Items;
@@ -194,7 +195,9 @@ public class MyFragment extends BaseFragment implements MyContract.View {
 
     public void onHeadClick(HeadClickEvent event) {
         if (Diycode.getSingleInstance().isLogin()) {
-
+            Intent intent = new Intent(getActivity(), PersonalActivity.class);
+            intent.putExtra(PersonalActivity.LOGIN_NAME, APP.userDetail.getLogin());
+            startActivity(intent);
         } else {
             goToLogin();
         }

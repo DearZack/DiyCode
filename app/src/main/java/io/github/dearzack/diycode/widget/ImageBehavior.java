@@ -24,7 +24,6 @@ public class ImageBehavior extends CoordinatorLayout.Behavior<View> {
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-        Log.e("zhouxiong", "layoutDependsOn");
         return dependency.getId() == R.id.app_bar_layout;
     }
 
@@ -33,11 +32,8 @@ public class ImageBehavior extends CoordinatorLayout.Behavior<View> {
         if (threshold == 0) {
             threshold = child.getContext().getResources().getDimension(R.dimen.personal_threshold);
         }
-        Log.e("zhouxiong", "Y:" + dependency.getY());
         float dependencyY = Math.abs(dependency.getY());
         float precent = Math.min(dependencyY / threshold, 1);
-        Log.e("zhouxiong", "precent" + precent);
-//        child.getBackground().setAlpha((int) (255 * (1 - precent)));
         child.setScaleX(1 - precent);
         child.setScaleY(1 - precent);
         child.setAlpha(1 - precent);
