@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +25,19 @@ import io.github.dearzack.diycode.personal.PersonalActivity;
 import io.github.dearzack.diycode.util.CommonUtils;
 import io.github.dearzack.diycode.util.GlideImageGetter;
 import io.github.dearzack.diycode.util.HtmlUtil;
+import io.github.dearzack.diycode.util.LinkMovementMethodExt;
+import io.github.dearzack.diycode.util.SpanClickListener;
+import io.github.dearzack.diycode.web.WebActivity;
 import me.drakeet.multitype.ItemViewBinder;
+
 
 /**
  * Created by zhouxiong on 2017-7-4.
  */
 
 public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, TopicDetailReplyViewBinder.ViewHolder> {
+
+    private static final String TAG = "TopicDetailReplyViewBin";
 
     @NonNull
     @Override
@@ -40,7 +47,7 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull final TopicReply item) {
+    protected void onBindViewHolder(final @NonNull ViewHolder holder, @NonNull final TopicReply item) {
         Glide.with(holder.avatar.getContext()).load(item.getUser().getAvatar_url()).error(R.mipmap.ic_launcher).into(holder.avatar);
         holder.author.setText(item.getUser().getName());
         holder.positionAndTime.setText(String.format(holder.positionAndTime.getContext().getString(R.string.topic_detail_position_and_time),
@@ -51,6 +58,24 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
         holder.content.setText(
                 Html.fromHtml(HtmlUtil.removeP(item.getBody_html()),
                         new GlideImageGetter(holder.content.getContext(), holder.content), null));
+        holder.content.setMovementMethod(new LinkMovementMethodExt(new SpanClickListener() {
+            @Override public void onClick(int type, String url) {
+                Log.d(TAG, "url: " + url);
+                if (url.startsWith("/")) {
+                    Log.d(TAG, "username: " + url.substring(1));
+                    Intent intent = new Intent(holder.content.getContext(), PersonalActivity.class);
+                    intent.putExtra(PersonalActivity.LOGIN_NAME, url.substring(1));
+                    holder.content.getContext().startActivity(intent);
+                } else if (url.startsWith("#")) {
+                    // url: "#reply1"
+                    Log.d(TAG, "楼");
+                } else {
+                    Intent intent = new Intent(holder.content.getContext(), WebActivity.class);
+                    intent.putExtra("url", url);
+                    holder.content.getContext().startActivity(intent);
+                }
+            }
+        }));
         holder.avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -47,6 +47,10 @@ public class TopicDetailPresenter implements TopicDetailContract.Presenter {
         }
         //SDK目前有问题，先这样，unLike,collectionTopic,unCollectionTopic暂时都不行
         try {
+            if (topicContent.getLiked() == null) {
+                return;
+                //说明没有登录
+            }
             if (topicContent.getLiked() != liked) {
                 Log.e("zack", "liked不相等");
                 if (topicContent.getLiked()) {
@@ -55,7 +59,10 @@ public class TopicDetailPresenter implements TopicDetailContract.Presenter {
                     Diycode.getSingleInstance().unLike("topic", topicContent.getId());
                 }
             }
-
+            if (topicContent.getFavorited() == null) {
+                return;
+                //说明没有登录
+            }
             if (topicContent.getFavorited() != favorite) {
                 Log.e("zack", "favorite不相等");
                 if (topicContent.getFavorited()) {
