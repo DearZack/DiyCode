@@ -41,7 +41,7 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull final TopicReply item) {
-        Glide.with(holder.avatar.getContext()).load(item.getUser().getAvatar_url()).into(holder.avatar);
+        Glide.with(holder.avatar.getContext()).load(item.getUser().getAvatar_url()).error(R.mipmap.ic_launcher).into(holder.avatar);
         holder.author.setText(item.getUser().getName());
         holder.positionAndTime.setText(String.format(holder.positionAndTime.getContext().getString(R.string.topic_detail_position_and_time),
                 getPosition(holder), CommonUtils.getHowLongAgo(item.getUpdated_at())));

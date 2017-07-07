@@ -31,7 +31,7 @@ public class SiteViewBinder extends ItemViewBinder<Sites.Site, SiteViewBinder.Vi
 
     @Override
     protected void onBindViewHolder(@NonNull final ViewHolder holder, @NonNull final Sites.Site item) {
-        Glide.with(holder.logo.getContext()).load(item.getAvatar_url()).into(holder.logo);
+        Glide.with(holder.logo.getContext()).load(item.getAvatar_url()).error(R.mipmap.ic_launcher).into(holder.logo);
         holder.name.setText(item.getName());
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -56,8 +55,6 @@ public class PersonalActivity extends BaseActivity implements PersonalDetailCont
     AppBarLayout appBarLayout;
     @BindView(R.id.list)
     LRecyclerView list;
-    @BindView(R.id.nsv)
-    NestedScrollView nsv;
     @BindView(R.id.other)
     TextView other;
 
@@ -90,6 +87,7 @@ public class PersonalActivity extends BaseActivity implements PersonalDetailCont
         lRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         list.setAdapter(lRecyclerViewAdapter);
         list.setPullRefreshEnabled(false);
+        list.setFooterViewColor(R.color.colorPrimary, R.color.colorPrimary, R.color.gray);
         list.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -129,7 +127,7 @@ public class PersonalActivity extends BaseActivity implements PersonalDetailCont
     public void onGetUser(GetUserEvent event) {
         if (event.isOk() && event.getBean() != null) {
             userDetail = event.getBean();
-            Glide.with(this).load(userDetail.getAvatar_url()).into(new GlideDrawableImageViewTarget(avatar) {
+            Glide.with(this).load(userDetail.getAvatar_url()).error(R.mipmap.ic_launcher).into(new GlideDrawableImageViewTarget(avatar) {
                 @Override
                 public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
                     super.onResourceReady(resource, animation);
@@ -153,6 +151,9 @@ public class PersonalActivity extends BaseActivity implements PersonalDetailCont
             list.refreshComplete(ConstantUtils.REQUEST_COUNT);
             for (Topic topic : event.getBean()) {
                 data.add(topic);
+            }
+            if (event.getBean().size() < 10) {
+                list.setLoadMoreEnabled(false);
             }
             adapter.notifyDataSetChanged();
         }

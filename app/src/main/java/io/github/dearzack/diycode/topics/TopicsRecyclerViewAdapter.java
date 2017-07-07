@@ -43,7 +43,7 @@ public class TopicsRecyclerViewAdapter extends RecyclerView.Adapter<TopicsRecycl
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Topic topic = data.get(position);
-        Glide.with(context).load(topic.getUser().getAvatar_url()).into(holder.avatar);
+        Glide.with(context).load(topic.getUser().getAvatar_url()).error(R.mipmap.ic_launcher).into(holder.avatar);
         holder.author.setText(topic.getUser().getName());
         holder.type.setText(topic.getNode_name());
         holder.time.setText(CommonUtils.getHowLongAgo(topic.getUpdated_at()));

@@ -43,7 +43,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         New news = data.get(position);
-        Glide.with(context).load(news.getUser().getAvatar_url()).into(holder.avatar);
+        Glide.with(context).load(news.getUser().getAvatar_url()).error(R.mipmap.ic_launcher).into(holder.avatar);
         holder.author.setText(news.getUser().getName());
         holder.type.setText(news.getNode_name());
         holder.time.setText(CommonUtils.getHowLongAgo(news.getUpdated_at()));

@@ -34,18 +34,21 @@ public class WebActivity extends BaseActivity implements WebContract.View {
         /**
          * 多页面在同一个WebView中打开，就是不新建activity或者调用系统浏览器打开
          */
-        @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Log.d(TAG, "shouldOverrideUrlLoading: " + url);
             return super.shouldOverrideUrlLoading(view, url);
         }
 
-        @Override public void onPageFinished(WebView view, String url) {
+        @Override
+        public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             toolbar.setTitle(view.getTitle());
         }
     };
     WebChromeClient webChromeClient = new WebChromeClient() {
-        @Override public void onProgressChanged(WebView view, int progress) {
+        @Override
+        public void onProgressChanged(WebView view, int progress) {
             if (progress < 100) {
                 progressBar.setVisibility(View.VISIBLE);
                 progressBar.setProgress(progress);
@@ -54,7 +57,8 @@ public class WebActivity extends BaseActivity implements WebContract.View {
             }
         }
 
-        @Override public void onReceivedTitle(WebView view, String title) {
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
             toolbar.setTitle(title);
         }

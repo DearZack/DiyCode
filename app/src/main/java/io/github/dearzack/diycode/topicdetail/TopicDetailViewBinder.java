@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.login.LoginActivity;
 import io.github.dearzack.diycode.personal.PersonalActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
+import io.github.dearzack.diycode.web.WebActivity;
 import io.github.dearzack.diycode.widget.ZWebView;
 import me.drakeet.multitype.ItemViewBinder;
 
@@ -38,11 +41,20 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
 
     @Override
     protected void onBindViewHolder(@NonNull final ViewHolder holder, @NonNull final TopicContent item) {
-        Glide.with(holder.avatar.getContext()).load(item.getUser().getAvatar_url()).into(holder.avatar);
+        Glide.with(holder.avatar.getContext()).load(item.getUser().getAvatar_url()).error(R.mipmap.ic_launcher).into(holder.avatar);
         holder.author.setText(item.getUser().getName());
         holder.type.setText(item.getNode_name());
         holder.webView.loadDataWithBaseURL("", ZWebView.setupWebContent(item.getBody_html(), true, true, "")
                 , "text/html", "UTF-8", "");
+        holder.webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Intent intent = new Intent(holder.webView.getContext(), WebActivity.class);
+                intent.putExtra("url", url);
+                holder.webView.getContext().startActivity(intent);
+                return true;
+            }
+        });
         holder.replyCount.setText(String.format(holder.replyCount.getContext()
                 .getString(R.string.topic_detail_reply_count), item.getReplies_count()));
         Typeface typeface = Typeface.createFromAsset(holder.like.getContext().getAssets(), "iconfont.ttf");
