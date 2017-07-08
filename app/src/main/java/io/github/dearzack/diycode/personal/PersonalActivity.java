@@ -38,11 +38,11 @@ import io.github.dearzack.diycode.base.BaseActivity;
 import io.github.dearzack.diycode.topics.TopicsRecyclerViewAdapter;
 import io.github.dearzack.diycode.util.ConstantUtils;
 
-public class PersonalActivity extends BaseActivity implements PersonalDetailContract.View {
+public class PersonalActivity extends BaseActivity implements PersonalContract.View {
 
     public static final String LOGIN_NAME = "LOGIN_NAME";
     @Inject
-    PersonalDetailPresenter presenter;
+    PersonalPresenter presenter;
     @BindView(R.id.avatar)
     ImageView avatar;
     @BindView(R.id.head_layout)
@@ -68,8 +68,8 @@ public class PersonalActivity extends BaseActivity implements PersonalDetailCont
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
         ButterKnife.bind(this);
-        DaggerPersonalDetailComponent.builder()
-                .personalDetailPresenterModule(new PersonalDetailPresenterModule(this))
+        DaggerPersonalComponent.builder()
+                .personalPresenterModule(new PersonalPresenterModule(this))
                 .build()
                 .inject(this);
         collapsingToolbarLayout.setTitle(" ");
@@ -109,7 +109,7 @@ public class PersonalActivity extends BaseActivity implements PersonalDetailCont
     }
 
     @Override
-    public void setPresenter(PersonalDetailContract.Presenter presenter) {
+    public void setPresenter(PersonalContract.Presenter presenter) {
 
     }
 

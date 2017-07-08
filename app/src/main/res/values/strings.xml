@@ -34,4 +34,7 @@
     <!--Personal-->
     <string name="personal_other">%1$d帖子/%2$d收藏/%3$d关注</string>
 
+    <!--Reply-->
+    <string name="reply_content">请输入评论内容</string>
+    <string name="reply_sned">发送</string>
 </resources>

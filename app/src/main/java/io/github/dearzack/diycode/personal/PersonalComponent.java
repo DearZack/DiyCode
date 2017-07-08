@@ -6,7 +6,7 @@ import dagger.Component;
  * Created by Zack on 2017/6/22.
  */
 
-@Component(modules = PersonalDetailPresenterModule.class)
-public interface PersonalDetailComponent {
+@Component(modules = PersonalPresenterModule.class)
+public interface PersonalComponent {
     void inject(PersonalActivity activity);
 }

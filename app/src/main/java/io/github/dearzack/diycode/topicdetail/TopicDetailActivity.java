@@ -3,12 +3,14 @@ package io.github.dearzack.diycode.topicdetail;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.gcssloop.diycode_sdk.api.Diycode;
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import com.gcssloop.diycode_sdk.api.topic.bean.TopicContent;
 import com.gcssloop.diycode_sdk.api.topic.bean.TopicReply;
@@ -21,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseActivity;
+import io.github.dearzack.diycode.login.LoginActivity;
+import io.github.dearzack.diycode.reply.ReplyActivity;
 import io.github.dearzack.diycode.util.ConstantUtils;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -37,6 +41,8 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
 
     Items items;
     MultiTypeAdapter adapter;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     private Topic topic;
 
@@ -69,7 +75,7 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
         items = new Items();
         adapter = new MultiTypeAdapter();
         adapter.register(TopicContent.class, new TopicDetailViewBinder());
-        adapter.register(TopicReply.class, new TopicDetailReplyViewBinder());
+        adapter.register(TopicReply.class, new TopicDetailReplyViewBinder(topic.getTitle()));
         adapter.setItems(items);
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
@@ -91,6 +97,20 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
         });
         presenter.getTopic(topic.getId());
         presenter.getTopicRepliesList(topic.getId(), 0, ConstantUtils.REQUEST_COUNT);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!Diycode.getSingleInstance().isLogin()) {
+                    Intent intent = new Intent(TopicDetailActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                Intent intent = new Intent(TopicDetailActivity.this, ReplyActivity.class);
+                intent.putExtra(ReplyActivity.TOPIC_ID, topic.getId());
+                intent.putExtra(ReplyActivity.TOPIC_TITLE, topic.getTitle());
+                startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_TO_REPLY);
+            }
+        });
     }
 
     @Override
@@ -120,13 +140,21 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case ConstantUtils.TOPIC_DETAIL_LOGIN:
+            case ConstantUtils.TOPIC_DETAIL_TO_LOGIN:
                 if (resultCode == RESULT_OK) {
                     items.clear();
                     adapter.notifyDataSetChanged();
                     presenter.getTopic(topic.getId());
                     presenter.getTopicRepliesList(topic.getId(), 0, ConstantUtils.REQUEST_COUNT);
                 }
+                break;
+            case ConstantUtils.TOPIC_DETAIL_TO_REPLY:
+                if (resultCode == RESULT_OK) {
+                    items.add(data.getSerializableExtra(ReplyActivity.TOPIC_REPLY));
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            default:
                 break;
         }
     }

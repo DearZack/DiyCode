@@ -41,7 +41,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         New news = data.get(position);
         Glide.with(context).load(news.getUser().getAvatar_url()).error(R.mipmap.ic_launcher).into(holder.avatar);
         holder.author.setText(news.getUser().getName());
@@ -53,7 +53,8 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
             @Override
             public void onClick(View v) {
                 NewsClickEvent clickEvent = new NewsClickEvent();
-                clickEvent.setMessage(data.get(holder.getAdapterPosition()));
+                // TODO: 2017/7/8 holder.getAdapterPosition()用这个方法数据会有偏移，原因未知
+                clickEvent.setMessage(data.get(position));
                 EventBus.getDefault().post(clickEvent);
             }
         });

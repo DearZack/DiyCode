@@ -8,10 +8,11 @@ public class ConstantUtils {
     public static final int REQUEST_COUNT = 10;
 //request code
 //    My
-    public static final int MY_LOGIN = 0x0001;
+    public static final int MY_TO_LOGIN = 0x0001;
 
 //    TopicDetail
-    public static final int TOPIC_DETAIL_LOGIN = 0x0101;
+    public static final int TOPIC_DETAIL_TO_LOGIN = 0x0101;
+    public static final int TOPIC_DETAIL_TO_REPLY = 0x0102;
 
 
 

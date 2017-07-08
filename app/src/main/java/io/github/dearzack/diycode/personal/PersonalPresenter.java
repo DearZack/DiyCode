@@ -14,12 +14,12 @@ import javax.inject.Inject;
  * Created by Zack on 2017/6/21.
  */
 
-public class PersonalDetailPresenter implements PersonalDetailContract.Presenter {
+public class PersonalPresenter implements PersonalContract.Presenter {
 
-    PersonalDetailContract.View view;
+    PersonalContract.View view;
 
     @Inject
-    public PersonalDetailPresenter(PersonalDetailContract.View view) {
+    public PersonalPresenter(PersonalContract.View view) {
         this.view = view;
     }
 

@@ -228,7 +228,7 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         //这里有个坑，不要调用getActivity().startActivityForResult(),这样回调是在fragment的宿主activity的onActivityResult
         //直接调用startActivityForResult（）回调的是自己的onActivityResult
-        startActivityForResult(intent, ConstantUtils.MY_LOGIN);
+        startActivityForResult(intent, ConstantUtils.MY_TO_LOGIN);
     }
 
     private void goToRelate(String type) {
@@ -241,7 +241,7 @@ public class MyFragment extends BaseFragment implements MyContract.View {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case ConstantUtils.MY_LOGIN:
+            case ConstantUtils.MY_TO_LOGIN:
                 if (resultCode == Activity.RESULT_OK) {
                     presenter.getMe();
                 }

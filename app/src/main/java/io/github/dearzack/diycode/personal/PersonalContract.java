@@ -10,7 +10,7 @@ import io.github.dearzack.diycode.base.BaseView;
  * Created by Zack on 2017/6/21.
  */
 
-public interface PersonalDetailContract {
+public interface PersonalContract {
 
     interface View extends BaseView<Presenter> {
         void onGetUser(GetUserEvent event);

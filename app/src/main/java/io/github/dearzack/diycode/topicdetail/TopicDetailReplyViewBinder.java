@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gcssloop.diycode_sdk.api.Diycode;
@@ -22,7 +21,9 @@ import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.login.LoginActivity;
 import io.github.dearzack.diycode.personal.PersonalActivity;
+import io.github.dearzack.diycode.reply.ReplyActivity;
 import io.github.dearzack.diycode.util.CommonUtils;
+import io.github.dearzack.diycode.util.ConstantUtils;
 import io.github.dearzack.diycode.util.GlideImageGetter;
 import io.github.dearzack.diycode.util.HtmlUtil;
 import io.github.dearzack.diycode.util.LinkMovementMethodExt;
@@ -38,6 +39,11 @@ import me.drakeet.multitype.ItemViewBinder;
 public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, TopicDetailReplyViewBinder.ViewHolder> {
 
     private static final String TAG = "TopicDetailReplyViewBin";
+    private String topicTitle;
+
+    public TopicDetailReplyViewBinder(String topicTitle) {
+        this.topicTitle = topicTitle;
+    }
 
     @NonNull
     @Override
@@ -95,18 +101,28 @@ public class TopicDetailReplyViewBinder extends ItemViewBinder<TopicReply, Topic
         holder.reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reply(v);
+                String prefix = "#" + getPosition(holder) + "楼 @" + item.getUser().getLogin() + " ";
+                int id = item.getTopic_id();
+                reply(v, prefix, id);
             }
         });
     }
 
-    private void reply(View view) {
+    private void reply(View view, String prefix, int id) {
         if (!Diycode.getSingleInstance().isLogin()) {
             Intent intent = new Intent(view.getContext(), LoginActivity.class);
             view.getContext().startActivity(intent);
             return;
         }
-        Toast.makeText(view.getContext(), "回复", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(view.getContext(), ReplyActivity.class);
+        intent.putExtra(ReplyActivity.REPLY_PREFIX, prefix);
+        intent.putExtra(ReplyActivity.TOPIC_ID, id);
+        intent.putExtra(ReplyActivity.TOPIC_TITLE, topicTitle);
+        if (view.getContext() instanceof TopicDetailActivity) {
+            ((TopicDetailActivity)view.getContext()).startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_TO_REPLY);
+        } else {
+            view.getContext().startActivity(intent);
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

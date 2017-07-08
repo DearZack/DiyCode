@@ -22,7 +22,8 @@
         <activity android:name=".web.WebActivity" />
         <activity android:name=".relate.RelateActivity" />
         <activity android:name=".topicdetail.TopicDetailActivity" />
-        <activity android:name=".personal.PersonalActivity"></activity>
+        <activity android:name=".personal.PersonalActivity"/>
+        <activity android:name=".reply.ReplyActivity"/>
     </application>
 
 </manifest>

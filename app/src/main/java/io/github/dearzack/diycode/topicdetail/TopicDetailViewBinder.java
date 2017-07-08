@@ -99,7 +99,7 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
         if (!Diycode.getSingleInstance().isLogin()) {
             Intent intent = new Intent(like.getContext(), LoginActivity.class);
             if (like.getContext() instanceof TopicDetailActivity) {
-                ((TopicDetailActivity) like.getContext()).startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_LOGIN);
+                ((TopicDetailActivity) like.getContext()).startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_TO_LOGIN);
             } else {
                 like.getContext().startActivity(intent);
             }
@@ -121,7 +121,7 @@ public class TopicDetailViewBinder extends ItemViewBinder<TopicContent, TopicDet
         if (!Diycode.getSingleInstance().isLogin()) {
             Intent intent = new Intent(favorite.getContext(), LoginActivity.class);
             if (favorite.getContext() instanceof TopicDetailActivity) {
-                ((TopicDetailActivity) favorite.getContext()).startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_LOGIN);
+                ((TopicDetailActivity) favorite.getContext()).startActivityForResult(intent, ConstantUtils.TOPIC_DETAIL_TO_LOGIN);
             } else {
                 favorite.getContext().startActivity(intent);
             }
