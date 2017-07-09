@@ -1,5 +1,7 @@
 package io.github.dearzack.diycode.notice;
 
+import com.gcssloop.diycode_sdk.api.notifications.event.GetNotificationsListEvent;
+
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
 
@@ -9,11 +11,11 @@ import io.github.dearzack.diycode.base.BaseView;
 
 public interface NoticeContract {
     interface View extends BaseView<Presenter> {
-
+        void onGetNotice(GetNotificationsListEvent event);
     }
 
     interface Presenter extends BasePresenter {
-        void getMe();
+        void getNotice(int offset, int limit);
         void logout();
     }
 }

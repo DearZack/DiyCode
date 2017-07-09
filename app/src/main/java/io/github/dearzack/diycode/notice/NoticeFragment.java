@@ -1,15 +1,30 @@
 package io.github.dearzack.diycode.notice;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.ConvertUtils;
+import com.gcssloop.diycode_sdk.api.notifications.bean.Notification;
+import com.gcssloop.diycode_sdk.api.notifications.event.GetNotificationsListEvent;
+import com.github.jdsjlzx.recyclerview.LRecyclerView;
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.base.BaseFragment;
+import io.github.dearzack.diycode.util.ConstantUtils;
 
 
 public class NoticeFragment extends BaseFragment implements NoticeContract.View {
@@ -17,7 +32,15 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
 
     @Inject
     NoticePresenter presenter;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.list)
+    LRecyclerView list;
     private View rootView;
+
+    private NoticeRecyclerViewAdapter adapter;
+    LRecyclerViewAdapter lRecyclerViewAdapter;
+    List<Notification> data;
 
 
     public NoticeFragment() {
@@ -69,6 +92,19 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
     }
 
     private void initView(View view) {
+        data = new ArrayList<>();
+        adapter = new NoticeRecyclerViewAdapter(getActivity(), data);
+        list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        lRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
+        list.setAdapter(lRecyclerViewAdapter);
+        list.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.bottom = ConvertUtils.dp2px(6);
+            }
+        });
+        presenter.getNotice(0, ConstantUtils.REQUEST_COUNT);
     }
 
 
@@ -82,4 +118,13 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
 
     }
 
+    @Override
+    public void onGetNotice(GetNotificationsListEvent event) {
+        if (event.isOk() && event.getBean() != null) {
+            for (Notification notification : event.getBean()) {
+                data.add(notification);
+            }
+            adapter.notifyDataSetChanged();
+        }
+    }
 }
