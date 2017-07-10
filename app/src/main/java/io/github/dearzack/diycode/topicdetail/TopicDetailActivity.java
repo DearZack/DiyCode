@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.blankj.utilcode.util.ConvertUtils;
@@ -30,6 +31,8 @@ import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 public class TopicDetailActivity extends BaseActivity implements TopicDetailContract.View {
+
+    public static final String TOPIC = "topic";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -86,7 +89,9 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
                 outRect.bottom = ConvertUtils.dp2px(6);
             }
         });
-        toolbar.setTitle(topic.getTitle());
+        if (!TextUtils.isEmpty(topic.getTitle())) {
+            toolbar.setTitle(topic.getTitle());
+        }
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -121,6 +126,7 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
     @Override
     public void showTopic(GetTopicEvent event) {
         if (event.isOk() && event.getBean() != null) {
+            toolbar.setTitle(event.getBean().getTitle());
             items.add(0, event.getBean());
             adapter.notifyDataSetChanged();
         }

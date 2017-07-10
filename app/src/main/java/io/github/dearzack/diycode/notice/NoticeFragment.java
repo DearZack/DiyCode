@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.gcssloop.diycode_sdk.api.notifications.bean.Notification;
 import com.gcssloop.diycode_sdk.api.notifications.event.GetNotificationsListEvent;
+import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 
@@ -41,6 +43,7 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
     private NoticeRecyclerViewAdapter adapter;
     LRecyclerViewAdapter lRecyclerViewAdapter;
     List<Notification> data;
+    boolean isRefresh = true;
 
 
     public NoticeFragment() {
@@ -104,7 +107,22 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
                 outRect.bottom = ConvertUtils.dp2px(6);
             }
         });
+        list.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isRefresh = true;
+                presenter.getNotice(0, ConstantUtils.REQUEST_COUNT);
+            }
+        });
+        list.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                isRefresh = false;
+                presenter.getNotice(data.size(), ConstantUtils.REQUEST_COUNT);
+            }
+        });
         presenter.getNotice(0, ConstantUtils.REQUEST_COUNT);
+        toolbar.setTitle("通知");
     }
 
 
@@ -121,6 +139,13 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
     @Override
     public void onGetNotice(GetNotificationsListEvent event) {
         if (event.isOk() && event.getBean() != null) {
+            if (isRefresh) {
+                data.clear();
+            }
+            list.refreshComplete(ConstantUtils.REQUEST_COUNT);
+            if (event.getBean().size() < ConstantUtils.REQUEST_COUNT) {
+                list.setLoadMoreEnabled(false);
+            }
             for (Notification notification : event.getBean()) {
                 data.add(notification);
             }

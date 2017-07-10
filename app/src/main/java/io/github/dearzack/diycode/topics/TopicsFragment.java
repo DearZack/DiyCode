@@ -126,11 +126,10 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
     }
 
 
-
     @Override
     public void goToTopicDetailActivity(Topic topic) {
         Intent intent = new Intent(getActivity(), TopicDetailActivity.class);
-        intent.putExtra("topic", topic);
+        intent.putExtra(TopicDetailActivity.TOPIC, topic);
         startActivity(intent);
     }
 
