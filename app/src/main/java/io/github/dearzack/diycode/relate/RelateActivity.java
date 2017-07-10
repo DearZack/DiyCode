@@ -52,6 +52,18 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
         initViews();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
     private void initViews() {
         items = new Items();
         adapter = new MultiTypeAdapter();
