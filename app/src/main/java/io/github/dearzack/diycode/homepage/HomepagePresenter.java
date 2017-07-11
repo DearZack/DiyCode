@@ -1,7 +1,5 @@
 package io.github.dearzack.diycode.homepage;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 /**
