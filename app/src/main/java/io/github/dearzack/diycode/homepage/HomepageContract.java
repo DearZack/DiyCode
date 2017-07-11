@@ -13,7 +13,6 @@ public interface HomepageContract {
     }
 
     interface Presenter extends BasePresenter {
-        void add();
-        void getNodes();
+        void add(int pageIndex);
     }
 }

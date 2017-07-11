@@ -2,8 +2,6 @@ package io.github.dearzack.diycode.homepage;
 
 import android.util.Log;
 
-import com.gcssloop.diycode_sdk.api.Diycode;
-
 import javax.inject.Inject;
 
 /**
@@ -30,12 +28,12 @@ public class HomepagePresenter implements HomepageContract.Presenter {
     }
 
     @Override
-    public void add() {
-        Log.e("zhouxiong", "zzzzzz");
-    }
-
-    @Override
-    public void getNodes() {
-        Diycode.getSingleInstance().getNewsNodesList();
+    public void add(int pageIndex) {
+        switch (pageIndex) {
+            case HomepageFragment.PAGE_TOPIC:
+                break;
+            case HomepageFragment.PAGE_NEW:
+                break;
+        }
     }
 }

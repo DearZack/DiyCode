@@ -22,6 +22,9 @@ import io.github.dearzack.diycode.base.BaseFragment;
 
 public class HomepageFragment extends BaseFragment implements HomepageContract.View {
 
+    public static final int PAGE_TOPIC = 0;
+    public static final int PAGE_NEW = 1;
+
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.vp_view)
@@ -136,7 +139,7 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
-        presenter.add();
+        presenter.add(viewPager.getCurrentItem());
     }
 
 
