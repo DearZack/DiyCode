@@ -22,6 +22,13 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -34,6 +41,7 @@ dependencies {
         exclude group: 'com.android.support'
     })
     compile 'com.github.gcssloop:diycode-sdk:0.1.0'
+//    compile 'com.github.DearZack:diycode-sdk:0.1.1'
     compile 'com.google.dagger:dagger:2.11'
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.android.support:support-v4:25.3.1'

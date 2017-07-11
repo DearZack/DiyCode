@@ -1,6 +1,7 @@
 package io.github.dearzack.diycode.relate;
 
 import com.gcssloop.diycode_sdk.api.Diycode;
+import com.gcssloop.diycode_sdk.api.user.event.GetUserCollectionTopicListEvent;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserCreateTopicListEvent;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserReplyTopicListEvent;
 
@@ -59,7 +60,7 @@ public class RelatePresenter implements RelateContract.Presenter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetMyFavorites(GetUserCreateTopicListEvent event){
+    public void onGetMyFavorites(GetUserCollectionTopicListEvent event){
         view.onGetMyFavorites(event);
     }
 

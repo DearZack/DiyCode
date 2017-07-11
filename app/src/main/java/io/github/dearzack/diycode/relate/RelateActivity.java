@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
+import com.gcssloop.diycode_sdk.api.user.event.GetUserCollectionTopicListEvent;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserCreateTopicListEvent;
 import com.gcssloop.diycode_sdk.api.user.event.GetUserReplyTopicListEvent;
 
@@ -119,7 +120,7 @@ public class RelateActivity extends BaseActivity implements RelateContract.View 
     }
 
     @Override
-    public void onGetMyFavorites(GetUserCreateTopicListEvent event) {
+    public void onGetMyFavorites(GetUserCollectionTopicListEvent event) {
         if (!type.equals(ConstantUtils.FAVORITE)) {
             return;
         }

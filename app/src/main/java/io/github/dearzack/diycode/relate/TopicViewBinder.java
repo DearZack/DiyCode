@@ -1,5 +1,6 @@
 package io.github.dearzack.diycode.relate;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.dearzack.diycode.R;
+import io.github.dearzack.diycode.topicdetail.TopicDetailActivity;
 import io.github.dearzack.diycode.util.CommonUtils;
 import me.drakeet.multitype.ItemViewBinder;
 
@@ -32,7 +34,7 @@ public class TopicViewBinder extends ItemViewBinder<Topic, TopicViewBinder.ViewH
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull Topic item) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull final Topic item) {
         Glide.with(holder.avatar.getContext()).load(item.getUser().getAvatar_url()).into(holder.avatar);
         holder.author.setText(item.getUser().getName());
         holder.type.setText(item.getNode_name());
@@ -41,6 +43,14 @@ public class TopicViewBinder extends ItemViewBinder<Topic, TopicViewBinder.ViewH
         holder.repliesCount.setText(String.format(
                 holder.repliesCount.getContext().getString(R.string.normal_replies_count),
                 item.getReplies_count()));
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), TopicDetailActivity.class);
+                intent.putExtra(TopicDetailActivity.TOPIC, item);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -56,10 +66,12 @@ public class TopicViewBinder extends ItemViewBinder<Topic, TopicViewBinder.ViewH
         TextView title;
         @BindView(R.id.replies_count)
         TextView repliesCount;
+        View root;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            root = itemView;
         }
     }
 }
