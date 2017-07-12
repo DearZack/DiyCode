@@ -16,7 +16,7 @@ public class TopicsPresenterModule {
     }
 
     @Provides
-    TopicsContract.View provideNormalContractView() {
+    TopicsContract.View provideTopicsContractView() {
         return view;
     }
 }

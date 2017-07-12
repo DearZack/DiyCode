@@ -16,7 +16,7 @@ public class SitesPresenterModule {
     }
 
     @Provides
-    SitesContract.View provideNormalContractView() {
+    SitesContract.View provideSitesContractView() {
         return view;
     }
 }

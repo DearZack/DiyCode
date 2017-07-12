@@ -17,7 +17,7 @@ public class TopicDetailPresenterModule {
     }
 
     @Provides
-    TopicDetailContract.View provideLoginContractView() {
+    TopicDetailContract.View provideTopicDetailContractView() {
         return view;
     }
 

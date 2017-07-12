@@ -16,7 +16,7 @@ public class NewsPresenterModule {
     }
 
     @Provides
-    NewsContract.View provideNormalContractView() {
+    NewsContract.View provideNewsContractView() {
         return view;
     }
 }

@@ -17,7 +17,7 @@ public class PersonalPresenterModule {
     }
 
     @Provides
-    PersonalContract.View provideLoginContractView() {
+    PersonalContract.View providePersonalContractView() {
         return view;
     }
 

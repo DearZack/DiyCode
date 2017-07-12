@@ -17,7 +17,7 @@ public class RelatePresenterModule {
     }
 
     @Provides
-    RelateContract.View provideLoginContractView() {
+    RelateContract.View provideRelateContractView() {
         return view;
     }
 

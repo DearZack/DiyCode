@@ -16,7 +16,7 @@ public class NoticePresenterModule {
     }
 
     @Provides
-    NoticeContract.View provideNormalContractView() {
+    NoticeContract.View provideNoticeContractView() {
         return view;
     }
 }

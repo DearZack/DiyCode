@@ -17,7 +17,7 @@ public class WebPresenterModule {
     }
 
     @Provides
-    WebContract.View provideLoginContractView() {
+    WebContract.View provideWebContractView() {
         return view;
     }
 
