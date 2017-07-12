@@ -8,6 +8,7 @@ import com.gcssloop.diycode_sdk.api.Diycode;
 import javax.inject.Inject;
 
 import io.github.dearzack.diycode.addnews.AddNewsActivity;
+import io.github.dearzack.diycode.addtopic.AddTopicActivity;
 import io.github.dearzack.diycode.login.LoginActivity;
 
 /**
@@ -40,11 +41,14 @@ public class HomepagePresenter implements HomepageContract.Presenter {
             context.startActivity(intent);
             return;
         }
+        Intent intent;
         switch (pageIndex) {
             case HomepageFragment.PAGE_TOPIC:
+                intent = new Intent(context, AddTopicActivity.class);
+                context.startActivity(intent);
                 break;
             case HomepageFragment.PAGE_NEW:
-                Intent intent = new Intent(context, AddNewsActivity.class);
+                intent = new Intent(context, AddNewsActivity.class);
                 context.startActivity(intent);
                 break;
         }

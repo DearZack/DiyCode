@@ -25,7 +25,8 @@
         <activity android:name=".topicdetail.TopicDetailActivity" />
         <activity android:name=".personal.PersonalActivity" />
         <activity android:name=".reply.ReplyActivity" />
-        <activity android:name=".addnews.AddNewsActivity"></activity>
+        <activity android:name=".addnews.AddNewsActivity" />
+        <activity android:name=".addtopic.AddTopicActivity"></activity>
     </application>
 
 </manifest>
