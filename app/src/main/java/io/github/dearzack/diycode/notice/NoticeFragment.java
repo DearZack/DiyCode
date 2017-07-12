@@ -145,6 +145,8 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
             list.refreshComplete(ConstantUtils.REQUEST_COUNT);
             if (event.getBean().size() < ConstantUtils.REQUEST_COUNT) {
                 list.setLoadMoreEnabled(false);
+            } else {
+                list.setLoadMoreEnabled(true);
             }
             for (Notification notification : event.getBean()) {
                 data.add(notification);

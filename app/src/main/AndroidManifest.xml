@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Transparent">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,9 @@
         <activity android:name=".web.WebActivity" />
         <activity android:name=".relate.RelateActivity" />
         <activity android:name=".topicdetail.TopicDetailActivity" />
-        <activity android:name=".personal.PersonalActivity"/>
-        <activity android:name=".reply.ReplyActivity"/>
+        <activity android:name=".personal.PersonalActivity" />
+        <activity android:name=".reply.ReplyActivity" />
+        <activity android:name=".addnews.AddNewsActivity"></activity>
     </application>
 
 </manifest>

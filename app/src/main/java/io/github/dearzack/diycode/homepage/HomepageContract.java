@@ -1,5 +1,7 @@
 package io.github.dearzack.diycode.homepage;
 
+import android.content.Context;
+
 import io.github.dearzack.diycode.base.BasePresenter;
 import io.github.dearzack.diycode.base.BaseView;
 
@@ -13,6 +15,6 @@ public interface HomepageContract {
     }
 
     interface Presenter extends BasePresenter {
-        void add(int pageIndex);
+        void add(int pageIndex, Context context);
     }
 }

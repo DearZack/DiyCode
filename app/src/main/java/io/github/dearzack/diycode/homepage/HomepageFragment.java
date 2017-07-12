@@ -139,7 +139,7 @@ public class HomepageFragment extends BaseFragment implements HomepageContract.V
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
-        presenter.add(viewPager.getCurrentItem());
+        presenter.add(viewPager.getCurrentItem(), getActivity());
     }
 
 

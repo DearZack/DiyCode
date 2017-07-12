@@ -143,10 +143,16 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
         }
         if (!TextUtils.isEmpty(replyAction)) {
             holder.action.setText(Html.fromHtml(replyAction));
+            holder.action.setVisibility(View.VISIBLE);
+        } else {
+            holder.action.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(replyContent)) {
             holder.content.setText(Html.fromHtml(HtmlUtil.removeP(replyContent),
                     new GlideImageGetter(holder.content.getContext(), holder.content), null));
+            holder.content.setVisibility(View.VISIBLE);
+        } else {
+            holder.content.setVisibility(View.GONE);
         }
     }
 

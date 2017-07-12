@@ -36,5 +36,10 @@
 
     <!--Reply-->
     <string name="reply_content">请输入评论内容</string>
-    <string name="reply_sned">发送</string>
+    <string name="reply_send">发送</string>
+
+    <!--AddNews-->
+    <string name="add_news_input_title">请输入标题</string>
+    <string name="add_news_input_link">请输入链接</string>
+    <string name="add_news_share_success">分享成功，请等待审核</string>
 </resources>
