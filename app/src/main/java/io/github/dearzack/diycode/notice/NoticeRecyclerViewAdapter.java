@@ -39,6 +39,7 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
     private static final String TYPE_MENTION = "Mention";
     private static final String TYPE_FOLLOW = "Follow";
     private static final String TYPE_NODE_CHANGE = "NodeChanged";
+    private static final String TYPE_HACKNEWS = "Hacknews";
     private static final String TYPE_HACKNEWS_REPLY = "HacknewsReply";
     private static final String TYPE_REPLY = "Reply";
     private int normalColor;
@@ -86,6 +87,8 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
                         intent.putExtra(PersonalActivity.LOGIN_NAME, notification.getActor().getLogin());
                         context.startActivity(intent);
                         break;
+                    case TYPE_HACKNEWS:
+                        break;
                     case TYPE_HACKNEWS_REPLY: //新闻被回复
                         break;
                     case TYPE_REPLY: //回复被回复
@@ -116,7 +119,7 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
             case TYPE_TOPIC_REPLY: //帖子被回复
                 replyAction = notification.getActor().getName() + toNormalColor("在帖子")
                         + notification.getReply().getTopic_title() + toNormalColor("回复了：");
-                replyContent = notification.getReply().getBody();
+                replyContent = notification.getReply().getBody_html();
                 break;
             case TYPE_MENTION: //被提及
                 replyAction = notification.getActor().getName() + toNormalColor("提到了你");
@@ -125,7 +128,11 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
             case TYPE_FOLLOW: //被跟随
                 replyAction = notification.getActor().getName() + toNormalColor("关注了你");
                 break;
+            case TYPE_HACKNEWS:
+                replyAction = toNormalColor("你发布的一条") + notification.getType() + toNormalColor("通过审核了");
+                break;
             case TYPE_HACKNEWS_REPLY: //新闻被回复
+                replyAction = toNormalColor("你发布的") + notification.getType() + toNormalColor("被回复了");
                 break;
             case TYPE_REPLY: //回复被回复
                 break;
