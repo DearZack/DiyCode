@@ -1,5 +1,7 @@
 package io.github.dearzack.diycode.addtopic;
 
+import com.gcssloop.diycode_sdk.api.Diycode;
+
 import javax.inject.Inject;
 
 /**
@@ -23,6 +25,7 @@ public class AddTopicPresenter implements AddTopicContract.Presenter {
     @Override
     public void start() {
 //        EventBus.getDefault().register(this);
+        Diycode.getSingleInstance().getTopicNodesList();
     }
 
     @Override
