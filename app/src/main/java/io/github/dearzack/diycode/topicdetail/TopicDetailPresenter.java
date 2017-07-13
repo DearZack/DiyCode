@@ -91,8 +91,8 @@ public class TopicDetailPresenter implements TopicDetailContract.Presenter {
     public void onGetTopic(GetTopicEvent event) {
         view.showTopic(event);
         topicContent = event.getBean();
-        liked = topicContent.getLiked();
-        favorite = topicContent.getFavorited();
+        liked = topicContent.getLiked() == null ? false : topicContent.getLiked();
+        favorite = topicContent.getFavorited() == null ? false : topicContent.getFavorited();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
