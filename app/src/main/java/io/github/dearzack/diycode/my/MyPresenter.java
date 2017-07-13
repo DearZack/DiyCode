@@ -1,6 +1,7 @@
 package io.github.dearzack.diycode.my;
 
 import com.gcssloop.diycode_sdk.api.Diycode;
+import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
 import com.gcssloop.diycode_sdk.api.login.event.LogoutEvent;
 import com.gcssloop.diycode_sdk.api.user.event.GetMeEvent;
 
@@ -45,6 +46,11 @@ public class MyPresenter implements MyContract.Presenter {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLogout(LogoutEvent event) {
         view.onLogout(event);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogin(LoginEvent event) {
+        view.onLogin(event);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

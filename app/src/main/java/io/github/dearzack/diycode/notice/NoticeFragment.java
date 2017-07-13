@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
+import com.gcssloop.diycode_sdk.api.login.event.LogoutEvent;
 import com.gcssloop.diycode_sdk.api.notifications.bean.Notification;
 import com.gcssloop.diycode_sdk.api.notifications.event.GetNotificationsListEvent;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
@@ -73,6 +75,7 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
                     .build()
                     .inject(this);
             initView(rootView);
+            presenter.start();
         }
 
         ViewGroup parent = (ViewGroup) rootView.getParent();
@@ -83,14 +86,8 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        presenter.start();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         presenter.stop();
     }
 
@@ -153,5 +150,19 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
             }
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onLogout(LogoutEvent event) {
+        if (event.isOk() && event.getBean() != null) {
+            data.clear();
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onLogin(LoginEvent event) {
+        isRefresh = true;
+        presenter.getNotice(0, ConstantUtils.REQUEST_COUNT);
     }
 }

@@ -1,5 +1,6 @@
 package io.github.dearzack.diycode.my;
 
+import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
 import com.gcssloop.diycode_sdk.api.login.event.LogoutEvent;
 import com.gcssloop.diycode_sdk.api.user.event.GetMeEvent;
 
@@ -15,6 +16,7 @@ public interface MyContract {
         void onGetMe(GetMeEvent event);
         void onHeadClick(HeadClickEvent event);
         void onLogout(LogoutEvent event);
+        void onLogin(LoginEvent event);
         void onNormalItemClick(NormalItemClickEvent event);
     }
 

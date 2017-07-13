@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
+import com.gcssloop.diycode_sdk.api.topic.event.CreateTopicEvent;
 import com.gcssloop.diycode_sdk.api.topic.event.GetTopicsListEvent;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
@@ -69,9 +70,9 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        presenter.stop();
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.stop();//要监听新建的Topic,在打开别的页面的时候持续监听
     }
 
     @Override
@@ -144,6 +145,14 @@ public class TopicsFragment extends BaseFragment implements TopicsContract.View 
                 data.add(topic);
             }
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onCreateTopicCallBack(CreateTopicEvent event) {
+        if (event.isOk() && event.getBean() != null) {
+            isRefresh = true;
+            presenter.getTopicsList(type, 0, ConstantUtils.REQUEST_COUNT);
         }
     }
 }

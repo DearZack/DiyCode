@@ -2,6 +2,7 @@ package io.github.dearzack.diycode.topics;
 
 import com.gcssloop.diycode_sdk.api.Diycode;
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
+import com.gcssloop.diycode_sdk.api.topic.event.CreateTopicEvent;
 import com.gcssloop.diycode_sdk.api.topic.event.GetTopicsListEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -46,5 +47,10 @@ public class TopicsPresenter implements TopicsContract.Presenter {
     @Override
     public void getTopicsList(String type, int offset, int limit) {
         Diycode.getSingleInstance().getTopicsList(null, null, offset, limit);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onCreateTopicCallBack(CreateTopicEvent event) {
+        view.onCreateTopicCallBack(event);
     }
 }

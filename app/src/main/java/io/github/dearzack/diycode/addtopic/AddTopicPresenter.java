@@ -1,6 +1,12 @@
 package io.github.dearzack.diycode.addtopic;
 
 import com.gcssloop.diycode_sdk.api.Diycode;
+import com.gcssloop.diycode_sdk.api.topic.event.CreateTopicEvent;
+import com.gcssloop.diycode_sdk.api.topic.event.GetTopicNodeListEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -24,13 +30,27 @@ public class AddTopicPresenter implements AddTopicContract.Presenter {
 
     @Override
     public void start() {
-//        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
         Diycode.getSingleInstance().getTopicNodesList();
     }
 
     @Override
     public void stop() {
-//        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    public void createTopic(String title, String body, int nodeId) {
+        Diycode.getSingleInstance().createTopic(title, body, nodeId);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetTopicNodeListCallBack(GetTopicNodeListEvent event) {
+        view.onGetTopicNodeListCallBack(event);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onCreateTopicCallBack(CreateTopicEvent event) {
+        view.onCreateTopicCallBack(event);
+    }
 }

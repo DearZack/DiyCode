@@ -1,6 +1,8 @@
 package io.github.dearzack.diycode.notice;
 
 import com.gcssloop.diycode_sdk.api.Diycode;
+import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
+import com.gcssloop.diycode_sdk.api.login.event.LogoutEvent;
 import com.gcssloop.diycode_sdk.api.notifications.event.GetNotificationsListEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,8 +43,13 @@ public class NoticePresenter implements NoticeContract.Presenter {
         view.onGetNotice(event);
     }
 
-    @Override
-    public void logout() {
-        Diycode.getSingleInstance().logout();
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogout(LogoutEvent event) {
+        view.onLogout(event);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogin(LoginEvent event) {
+        view.onLogin(event);
     }
 }

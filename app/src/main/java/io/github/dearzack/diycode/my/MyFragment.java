@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gcssloop.diycode_sdk.api.Diycode;
+import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
 import com.gcssloop.diycode_sdk.api.login.event.LogoutEvent;
 import com.gcssloop.diycode_sdk.api.user.bean.UserDetail;
 import com.gcssloop.diycode_sdk.api.user.event.GetMeEvent;
@@ -72,6 +73,7 @@ public class MyFragment extends BaseFragment implements MyContract.View {
                     .build()
                     .inject(this);
             initView(rootView);
+            presenter.start();
         }
 
         ViewGroup parent = (ViewGroup) rootView.getParent();
@@ -82,14 +84,8 @@ public class MyFragment extends BaseFragment implements MyContract.View {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        presenter.start();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         presenter.stop();
     }
 
@@ -203,8 +199,18 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         }
     }
 
+    @Override
     public void onLogout(LogoutEvent event) {
-         addEmptyItems();
+        if (event.isOk() && event.getBean() != null) {
+            addEmptyItems();
+        }
+    }
+
+    @Override
+    public void onLogin(LoginEvent event) {
+        if (event.isOk() && event.getBean() != null) {
+            presenter.getMe();
+        }
     }
 
     public void onNormalItemClick(NormalItemClickEvent event) {
@@ -228,7 +234,7 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         //这里有个坑，不要调用getActivity().startActivityForResult(),这样回调是在fragment的宿主activity的onActivityResult
         //直接调用startActivityForResult（）回调的是自己的onActivityResult
-        startActivityForResult(intent, ConstantUtils.MY_TO_LOGIN);
+        startActivity/*ForResult*/(intent/*, ConstantUtils.MY_TO_LOGIN*/);
     }
 
     private void goToRelate(String type) {

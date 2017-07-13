@@ -42,4 +42,7 @@
     <string name="add_news_input_title">请输入标题</string>
     <string name="add_news_input_link">请输入链接</string>
     <string name="add_news_share_success">分享成功，请等待审核</string>
+
+    <string name="add_topic_select_type">分类：  %1$s  ---  %2$s</string>
+    <string name="add_topic_content">请输入内容</string>
 </resources>
