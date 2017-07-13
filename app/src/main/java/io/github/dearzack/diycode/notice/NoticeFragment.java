@@ -151,7 +151,6 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
             }
             adapter.notifyDataSetChanged();
         } else {
-            Toast.makeText(getContext(), event.getCodeDescribe(), Toast.LENGTH_SHORT).show();
             list.refreshComplete(0);
         }
     }
