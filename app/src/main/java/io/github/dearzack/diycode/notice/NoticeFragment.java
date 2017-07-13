@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.gcssloop.diycode_sdk.api.login.event.LoginEvent;
@@ -149,6 +150,9 @@ public class NoticeFragment extends BaseFragment implements NoticeContract.View 
                 data.add(notification);
             }
             adapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(getContext(), event.getCodeDescribe(), Toast.LENGTH_SHORT).show();
+            list.refreshComplete(0);
         }
     }
 
