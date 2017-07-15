@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gcssloop.diycode_sdk.api.Diycode;
 import com.gcssloop.diycode_sdk.api.notifications.bean.Notification;
 import com.gcssloop.diycode_sdk.api.topic.bean.Topic;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ezy.ui.view.BadgeButton;
 import io.github.dearzack.diycode.R;
 import io.github.dearzack.diycode.personal.PersonalActivity;
 import io.github.dearzack.diycode.topicdetail.TopicDetailActivity;
@@ -64,7 +66,11 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Diycode.getSingleInstance().markNotificationAsRead(new int[]{notification.getId()});
+                if (notification.getRead() != null && !notification.getRead()) {
+                    Diycode.getSingleInstance().markNotificationAsRead(new int[]{notification.getId()});
+                    notification.setRead(true);
+                    notifyDataSetChanged();
+                }
 //                这个接口也有问题
                 Intent intent;
                 Topic topic = new Topic();
@@ -101,6 +107,11 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
                 }
             }
         });
+        if (notification.getRead() == null || !notification.getRead()) {
+            holder.readFlag.setBadgeVisible(true);
+        } else {
+            holder.readFlag.setBadgeVisible(false);
+        }
         if (notification.getActor() == null) { //系统消息
             Glide.with(context).load(R.drawable.admin).error(R.mipmap.ic_launcher).into(holder.avatar);
             replyAction = toNormalColor("管理员将你的帖子") + notification.getTopic().getTitle()
@@ -175,6 +186,8 @@ public class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecycl
         TextView content;
         @BindView(R.id.time)
         TextView time;
+        @BindView(R.id.read_flag)
+        BadgeButton readFlag;
         View root;
 
         public ViewHolder(View itemView) {
