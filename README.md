@@ -22,3 +22,4 @@
 - [ ] 增加Github Ranking标签
 - [ ] 增加Wiki标签
 - [ ] News回复功能
+- [ ] 缓存信息
