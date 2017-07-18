@@ -12,14 +12,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
 
     protected BGASwipeBackHelper mSwipeBackHelper;
     protected AlertDialog.Builder builder;
+    protected AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
         builder = new AlertDialog.Builder(this)
-                .setTitle("sss")
-                .setMessage("aaa")
                 .setView(R.layout.dialog_progress_hint)
                 .setCancelable(false);
 //        setContent();
