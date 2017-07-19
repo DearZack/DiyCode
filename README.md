@@ -4,6 +4,9 @@
 ## 截图
 <img src="./ScreenShot/1.jpeg">
 
+<img src="./ScreenShot/login.gif">
+> 登录时等待的dialog的动画用了我另外一个库[LoadingWave](https://github.com/DearZack/LoadingWave)，欢迎大家star和fork
+
 ## 下载
 [DiyCode](./apk/DiyCode.apk)
 
