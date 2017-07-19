@@ -52,8 +52,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void onLogin(LoginEvent event) {
-        if (dialog.isShowing()) {
-            dialog.dismiss();
+        if (baseDialog.isShowing()) {
+            baseDialog.dismiss();
         }
         if (event.isOk() && event.getBean() != null) {
             Intent intent = getIntent();
@@ -80,6 +80,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             return;
         }
         presenter.login(account.getText().toString(), password.getText().toString());
-        dialog = builder.show();
+        baseDialog.show();
     }
 }

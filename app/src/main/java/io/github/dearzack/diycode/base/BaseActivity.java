@@ -1,7 +1,6 @@
 package io.github.dearzack.diycode.base;
 
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -11,16 +10,13 @@ import io.github.dearzack.diycode.R;
 public abstract class BaseActivity extends AppCompatActivity implements BGASwipeBackHelper.Delegate {
 
     protected BGASwipeBackHelper mSwipeBackHelper;
-    protected AlertDialog.Builder builder;
-    protected AlertDialog dialog;
+    protected BaseDialog baseDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
-        builder = new AlertDialog.Builder(this)
-                .setView(R.layout.dialog_progress_hint)
-                .setCancelable(false);
+        baseDialog = new BaseDialog(this);
 //        setContent();
 //        initData();
 //        initView();
